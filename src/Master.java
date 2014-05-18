@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-//This is the Master/Main Java Class and should be used for calling other Java classes
+//This is the Master/Main Java Class and is reserved for calling other java classes/bringing everything together
 public class Master {
 
 	public static void main(String[] args) {
