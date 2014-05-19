@@ -13,6 +13,11 @@ import javax.swing.JTextArea;
  * http://docs.oracle.com/javase/tutorial/uiswing/components/componentlist.html*/
 
 public class Board extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -202995241589559897L;
+
 	public Board(String title) {
 		super(title);
 		
