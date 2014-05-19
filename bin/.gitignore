@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-/Testing.class
-/TestingJFrame$1.class
-/TestingJFrame.class
-/Master$1.class
-/Master.class
-=======
-/Board$1.class
 /Board.class
+/Board$1.class
+/Board.old
 /Entity.class
-/Master$1.class
-/Master.class
-/Maze$Point.class
-/Maze.class
->>>>>>> 9e7fcfc9faec1618c7b8c7317c183be8ce379517
+/Master.old
