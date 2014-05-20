@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 
@@ -44,6 +45,7 @@ public class ApplicationUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 843, 547);
 		
+		/*Menu Items*/
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -86,6 +88,7 @@ public class ApplicationUI extends JFrame {
 		gridBagLayout.rowWeights = new double[]{10.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 		
+		/*Maze Section*/
 		JPanel MazeUI = new JPanel();
 		MazeUI.setBackground(Color.DARK_GRAY);
 		GridBagConstraints gbc_MazeUI = new GridBagConstraints();
@@ -95,12 +98,21 @@ public class ApplicationUI extends JFrame {
 		gbc_MazeUI.gridy = 0;
 		getContentPane().add(MazeUI, gbc_MazeUI);
 		GridBagLayout gbl_MazeUI = new GridBagLayout();
-		gbl_MazeUI.columnWidths = new int[]{0};
-		gbl_MazeUI.rowHeights = new int[]{0};
-		gbl_MazeUI.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_MazeUI.rowWeights = new double[]{Double.MIN_VALUE};
+		gbl_MazeUI.columnWidths = new int[]{0, 0};
+		gbl_MazeUI.rowHeights = new int[]{0, 0};
+		gbl_MazeUI.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_MazeUI.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		MazeUI.setLayout(gbl_MazeUI);
 		
+		JTextArea txtrPlaceholderForGraphicsd = new JTextArea();
+		txtrPlaceholderForGraphicsd.setText("PLACEHOLDER FOR GRAPHICS2D");
+		GridBagConstraints gbc_txtrPlaceholderForGraphicsd = new GridBagConstraints();
+		gbc_txtrPlaceholderForGraphicsd.fill = GridBagConstraints.BOTH;
+		gbc_txtrPlaceholderForGraphicsd.gridx = 0;
+		gbc_txtrPlaceholderForGraphicsd.gridy = 0;
+		MazeUI.add(txtrPlaceholderForGraphicsd, gbc_txtrPlaceholderForGraphicsd);
+		
+		/*Info Section*/
 		JPanel InfoPanel = new JPanel();
 		InfoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_InfoPanel = new GridBagConstraints();
@@ -131,5 +143,6 @@ public class ApplicationUI extends JFrame {
 		InfoPanel.add(timeRemainingField, gbc_timeRemainingField);
 		timeRemainingField.setColumns(10);
 		timeRemainingField.setEnabled(false);
+		
 	}
 }
