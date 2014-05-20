@@ -35,13 +35,13 @@ public class Maze {
 	
 	public void generateMaze(int row, int column){
 		// build maze and initialize with only walls
-        StringBuilder s = new StringBuilder(column);
-        for(int x=0;x<column;x++){
-        	s.append('*');
+        StringBuilder sb = new StringBuilder(column);
+        for(int i=0;i<column; i++){
+        	sb.append('*');
         }	
         setMaz(row, column);
         for(int x=0;x<row;x++) {
-        	getMaz()[x] = s.toString().toCharArray();
+        	getMaz()[x] = sb.toString().toCharArray();
         }
         
  
@@ -51,51 +51,51 @@ public class Maze {
         
  
         // iterate through direct neighbors of node
-        ArrayList<Point> frontier = new ArrayList<Point>();
-        for(int x=-1;x<=1;x++){
-        	for(int y=-1;y<=1;y++){
-        		if(x==0&&y==0||x!=0&&y!=0){
+        ArrayList<Point> fmaze = new ArrayList<Point>();
+        for(int i=-1;i<=1;i++){
+        	for(int k=-1;k<=1;k++){
+        		if(i==0 && k==0 || i!=0 && k!=0){
         			continue;
         		}	
         		try{
-        			if(getMaz()[start.r+x][start.c+y]=='.') continue;
+        			if(getMaz()[start.r+i][start.c+k]=='.') continue;
         		}catch(Exception e){ // ignore ArrayIndexOutOfBounds
         			continue;
         		}
         		// add eligible points to frontier
-        		frontier.add(new Point(start.r+x,start.c+y,start));
+        		fmaze.add(new Point(start.r+i,start.c+k,start));
         	}
         }
  
         end=null;
-        while(!frontier.isEmpty()){
+        while(!fmaze.isEmpty()){
  
         	// pick current node at random
-        	Point cu = frontier.remove((int)(Math.random()*frontier.size()));
-        	Point op = cu.opposite();
+        	Point currentnode = fmaze.remove((int)(Math.random()*fmaze.size()));
+        	Point currentopp = currentnode.opposite();
         	try{
         		// if both node and its opposite are walls
-        		if(getMaz()[cu.r][cu.c]=='*'){
-        			if(getMaz()[op.r][op.c]=='*'){
+        		if(getMaz()[currentnode.r][currentnode.c]=='*'){
+        			if(getMaz()[currentopp.r][currentopp.c]=='*'){
  
         				// open path between the nodes
-        				getMaz()[cu.r][cu.c]='.';
-        				getMaz()[op.r][op.c]='.';
+        				getMaz()[currentnode.r][currentnode.c]='.';
+        				getMaz()[currentopp.r][currentopp.c]='.';
  
         				// store end node in order to mark it later
-        				end = op;
+        				end = currentopp;
  
         				// iterate through direct neighbors of node, same as earlier
-        				for(int x=-1;x<=1;x++){
-				        	for(int y=-1;y<=1;y++){
-				        		if(x==0&&y==0||x!=0&&y!=0)
+        				for(int i=-1; i<=1; i++){
+				        	for(int k=-1; k<=1; k++){
+				        		if(i==0 && k==0 || i !=0 && k!=0)
 				        			continue;
 				        		try{
-				        			if(getMaz()[op.r+x][op.c+y]=='.') continue;
+				        			if(getMaz()[currentopp.r+i][currentopp.c+k]=='.') continue;
 				        		}catch(Exception e){
 				        			continue;
 				        		}
-				        		frontier.add(new Point(op.r+x,op.c+y,op));
+				        		fmaze.add(new Point(currentopp.r+i,currentopp.c+k,currentopp));
 				        	}
         				}
         			}
@@ -104,7 +104,7 @@ public class Maze {
         	}
  
         	// if algorithm has resolved, mark end node
-        	if(frontier.isEmpty()){
+        	if(fmaze.isEmpty()){
         		getMaz()[end.r][end.c]='E';
         	}
         }
