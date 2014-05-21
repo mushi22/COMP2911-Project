@@ -1,26 +1,14 @@
-import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 
 public class ApplicationUI extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6865397917577836605L;
-
+	private static final long serialVersionUID = 3721536444080124105L;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -53,11 +41,11 @@ public class ApplicationUI extends JFrame {
 		getContentPane().setLayout(gridBagLayout);
 		
 		/*Menu Bar*/
-		MyMenuBar menuBar = new MyMenuBar();
+		menuBar = new MyMenuBar();
 		setJMenuBar(menuBar);
 		
 		/*Maze Section*/
-		MyMazePanel mazePanel = new MyMazePanel();
+		mazePanel = new MyMazePanel();
 		GridBagConstraints gbc_MazePanel = new GridBagConstraints();
 		gbc_MazePanel.insets = new Insets(0, 0, 0, 0);
 		gbc_MazePanel.fill = GridBagConstraints.BOTH;
@@ -66,13 +54,38 @@ public class ApplicationUI extends JFrame {
 		getContentPane().add(mazePanel, gbc_MazePanel);
 		
 		/*Info Section*/
-		MyInfoPanel infoPanel = new MyInfoPanel();
+		infoPanel = new MyInfoPanel();
 		GridBagConstraints gbc_infoPanel = new GridBagConstraints();
 		gbc_infoPanel.anchor = GridBagConstraints.WEST;
 		gbc_infoPanel.fill = GridBagConstraints.BOTH;
 		gbc_infoPanel.gridx = 0;
 		gbc_infoPanel.gridy = 1;
 		getContentPane().add(infoPanel, gbc_infoPanel);
-
+		
+		/*Listeners*/
+		menuBar.addMenuBarListener(new MenuBarListener() {
+			public void menuBarEventOccured(MenuBarEvent event) {
+				String menuName = event.getMenuName();
+				String text = event.getText();
+				
+				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced")) {
+					mazePanel.appendTextTESTING(text);
+				} else if (menuName.equals("Custom")) {
+					mazePanel.appendTextTESTING(text);
+				} else if (menuName.equals("Restart")) {
+					mazePanel.appendTextTESTING(text);
+				} else if (menuName.equals("Quit")) {
+					mazePanel.appendTextTESTING(text);
+				} else if (menuName.equals("Instructions")) {
+					mazePanel.appendTextTESTING(text);
+				} else if (menuName.equals("About Us")) {
+					mazePanel.appendTextTESTING(text);
+				}
+			}
+		});
 	}
+	
+	private MyMenuBar menuBar;
+	private MyMazePanel mazePanel;
+	private MyInfoPanel infoPanel;
 }

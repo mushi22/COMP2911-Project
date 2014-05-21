@@ -9,10 +9,6 @@ import javax.swing.JTextField;
 
 
 public class MyInfoPanel extends JPanel {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8699105079283174266L;
 
 	/**
