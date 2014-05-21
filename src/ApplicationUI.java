@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -90,7 +91,16 @@ public class ApplicationUI extends JFrame {
 					text = mz.generateMaze(row, column);
 					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("Restart")) {
-					mazePanel.setTextTESTING(text);
+					//mazePanel.setTextTESTING(text);
+					//USING THIS FOR DEBUG -> LOADING GRAPHICS RESOURCES
+					String path = System.getProperty("user.dir");
+					System.out.println(path + "\\Graphics\\Neon Wall Sprite 1.png");
+					File file = new File(path + "\\Graphics\\Neon Wall Sprite 1.png");
+					
+					if(!file.exists()) {
+						System.out.println("Something is broken :(");
+					}
+					
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
