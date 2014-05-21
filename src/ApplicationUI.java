@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class ApplicationUI extends JFrame {
@@ -91,11 +92,14 @@ public class ApplicationUI extends JFrame {
 				} else if (menuName.equals("Restart")) {
 					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("Quit")) {
-					System.exit(0);
+					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
+					if (option == JOptionPane.YES_OPTION) {
+						System.exit(0);
+					}
 				} else if (menuName.equals("Instructions")) {
 					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("About Us")) {
-					mazePanel.setTextTESTING(text);
+					JOptionPane.showMessageDialog(mazePanel, "Create by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		});
