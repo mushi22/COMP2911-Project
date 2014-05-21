@@ -23,7 +23,7 @@ public class MyMazePanel extends JPanel {
 		setLayout(gbl_MazePanel);
 		
 		txtrPlaceholderForGraphicsd = new JTextArea();
-		txtrPlaceholderForGraphicsd.setText("PLACEHOLDER FOR GRAPHICS2D");
+		//txtrPlaceholderForGraphicsd.setText("PLACEHOLDER FOR GRAPHICS2D");
 		GridBagConstraints gbc_txtrPlaceholderForGraphicsd = new GridBagConstraints();
 		gbc_txtrPlaceholderForGraphicsd.fill = GridBagConstraints.BOTH;
 		gbc_txtrPlaceholderForGraphicsd.gridx = 0;
@@ -31,8 +31,8 @@ public class MyMazePanel extends JPanel {
 		add(txtrPlaceholderForGraphicsd, gbc_txtrPlaceholderForGraphicsd);
 	}
 	
-	public void appendTextTESTING(String text) {
-		txtrPlaceholderForGraphicsd.append(text);
+	public void setTextTESTING(String text) {
+		txtrPlaceholderForGraphicsd.setText(text);
 	}
 	
 	private JTextArea txtrPlaceholderForGraphicsd;

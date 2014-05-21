@@ -22,7 +22,7 @@ public class Maze {
 	}
 
 
-	public static void main(String[]args)
+/*	public static void main(String[]args)
     {
     	// dimensions of generated maze
     	int row=20;
@@ -30,10 +30,10 @@ public class Maze {
     	Maze mz = new Maze();
     	mz.generateMaze(row, column);
     	
-    }
+    }*/
  
 
-	public void generateMaze(int row, int column){
+	public String generateMaze(int row, int column){
 		// build maze and initialize with only walls
         StringBuilder sb = new StringBuilder(column);
         for(int i=0;i<column; i++){
@@ -108,14 +108,19 @@ public class Maze {
         		getMaz()[end.r][end.c]='E';
         	}
         }
- 
+        
+        String mazeString = "";
 		// print final maze
 		for(int i=0;i<row;i++){
 			for(int j=0;j<column;j++){
-				System.out.print(getMaz()[i][j]);
+				//System.out.print(getMaz()[i][j]);
+				mazeString = mazeString.concat(Character.toString(getMaz()[i][j]));
 			}
-			System.out.println();
+			//System.out.println();
+			mazeString = mazeString.concat("\n");
 		}
+		
+		return mazeString;
 	}
     static class Point{
     	Integer r;

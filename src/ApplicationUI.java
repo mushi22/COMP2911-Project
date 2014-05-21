@@ -66,20 +66,36 @@ public class ApplicationUI extends JFrame {
 		menuBar.addMenuBarListener(new MenuBarListener() {
 			public void menuBarEventOccured(MenuBarEvent event) {
 				String menuName = event.getMenuName();
-				String text = event.getText();
+				String text = event.getText();	//Change to COMMAND!
 				
-				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced")) {
-					mazePanel.appendTextTESTING(text);
-				} else if (menuName.equals("Custom")) {
-					mazePanel.appendTextTESTING(text);
+				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced") || menuName.equals("Custom")) {
+					Maze mz = new Maze();
+					int row = 0;
+					int column = 0;
+					if (menuName.equals("Beginner")) {
+						row = 5;
+						column = 5;
+					} else if (menuName.equals("Intermediate")) {
+						row = 10;
+						column = 10;
+					} else if (menuName.equals("Advanced")) {
+						row = 15;
+						column = 15;
+					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE
+						row = 20;
+						column = 20;
+					}
+					
+					text = mz.generateMaze(row, column);
+					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("Restart")) {
-					mazePanel.appendTextTESTING(text);
+					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("Quit")) {
-					mazePanel.appendTextTESTING(text);
+					System.exit(0);
 				} else if (menuName.equals("Instructions")) {
-					mazePanel.appendTextTESTING(text);
+					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("About Us")) {
-					mazePanel.appendTextTESTING(text);
+					mazePanel.setTextTESTING(text);
 				}
 			}
 		});
