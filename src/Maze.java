@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.awt.Point;
+
 
 /*
  * 
@@ -9,20 +12,22 @@ import java.util.ArrayList;
  */
 
 public class Maze {
-	private char[][] maz;
+	private static final int START = 2;
+	private int[][] maz;
 	private Point start;
 	private Point end;
-	public char[][] getMaz() {
+	
+	public int[][] getMaz() {
 		return maz;
 	}
 
 
 	public void setMaz(int row, int column) {
-		this.maz = new char[row][column];
+		this.maz = new int[row][column];
 	}
 
 
-/*	public static void main(String[]args)
+	public static void main(String[]args)
     {
     	// dimensions of generated maze
     	int row=20;
@@ -30,112 +35,86 @@ public class Maze {
     	Maze mz = new Maze();
     	mz.generateMaze(row, column);
     	
-    }*/
+    }
  
 
-	public String generateMaze(int row, int column){
-		// build maze and initialize with only walls
-        StringBuilder sb = new StringBuilder(column);
-        for(int i=0;i<column; i++){
-        	sb.append('*');
-        }	
+	public void generateMaze(int row, int column){
+        //default value of 0 for arrays of integral types is guaranteed by the language spec
+        //int[] tRow= new int[column];
         setMaz(row, column);
-        for(int x=0;x<row;x++) {
-        	getMaz()[x] = sb.toString().toCharArray();
-        }
+        //for(int x=0;x<row;x++) {
+        //	getMaz()[x] = tRow;
+        //}
         
- 
-        // select random point and open as start node
-        start = new Point((int)(Math.random()*row),(int)(Math.random()*column),null);
-        getMaz()[start.r][start.c] = 'S';
+        start = new Point((int)(Math.random()*row),(int)(Math.random()*column));
+        getMaz()[(int) start.getY()][(int) start.getX()] = START;
         
- 
-        // iterate through direct neighbors of node
-        ArrayList<Point> fmaze = new ArrayList<Point>();
-        for(int i=-1;i<=1;i++){
-        	for(int k=-1;k<=1;k++){
-        		if(i==0 && k==0 || i!=0 && k!=0){
-        			continue;
-        		}	
-        		try{
-        			if(getMaz()[start.r+i][start.c+k]=='.') continue;
-        		}catch(Exception e){ // ignore ArrayIndexOutOfBounds
-        			continue;
-        		}
-        		// add eligible points to frontier
-        		fmaze.add(new Point(start.r+i,start.c+k,start));
-        	}
-        }
+        // get neighbours (each key has a value of where it came from)
+        ArrayList<Point> cameFrom = new ArrayList<Point>();
+        ArrayList<Point> ngh = getNGH(start, cameFrom);
+        		
  
         end=null;
-        while(!fmaze.isEmpty()){
+        while(!ngh.isEmpty()){
  
         	// pick current node at random
-        	Point currentnode = fmaze.remove((int)(Math.random()*fmaze.size()));
-        	Point currentopp = currentnode.opposite();
+        	int temp = (int)(Math.random()*ngh.size());
+        	Point currentnode = ngh.remove(temp);
+        	Point currentopp = cameFrom.remove(temp);
+        	
+        	
+        	int diffy = (int) (currentnode.getY() - currentopp.getY());
+        	int diffx = (int) (currentnode.getX() - currentopp.getX());
+        	//one of these if's should always happen, add an exception handler because design course
+        	if(diffy != 0 )
+        		currentopp = new Point((int) currentnode.getX(),(int) currentnode.getY()+diffy);
+        	else if(diffx != 0)
+        		currentopp = new Point((int) currentnode.getX() +diffx,(int) currentnode.getY());
+        	
         	try{
         		// if both node and its opposite are walls
-        		if(getMaz()[currentnode.r][currentnode.c]=='*'){
-        			if(getMaz()[currentopp.r][currentopp.c]=='*'){
+        		if(getMaz()[(int) currentnode.getY()][(int) currentnode.getX()]==0 && getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]==0){
+    				// open path between the nodes
+    				getMaz()[(int) currentnode.getY()][(int) currentnode.getX()]=1;
+    				getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]=1;
  
-        				// open path between the nodes
-        				getMaz()[currentnode.r][currentnode.c]='.';
-        				getMaz()[currentopp.r][currentopp.c]='.';
- 
-        				// store end node in order to mark it later
-        				end = currentopp;
+    				// store end node in order to mark it later
+    				end = currentopp;
  
         				// iterate through direct neighbors of node, same as earlier
-        				for(int i=-1; i<=1; i++){
-				        	for(int k=-1; k<=1; k++){
-				        		if(i==0 && k==0 || i !=0 && k!=0)
-				        			continue;
-				        		try{
-				        			if(getMaz()[currentopp.r+i][currentopp.c+k]=='.') continue;
-				        		}catch(Exception e){
-				        			continue;
-				        		}
-				        		fmaze.add(new Point(currentopp.r+i,currentopp.c+k,currentopp));
-				        	}
-        				}
-        			}
+    				ngh.addAll(getNGH(currentopp,cameFrom));
         		}
-        	}catch(Exception e){ // ignore NullPointer and ArrayIndexOutOfBounds
-        	}
- 
-        	// if algorithm has resolved, mark end node
-        	if(fmaze.isEmpty()){
-        		getMaz()[end.r][end.c]='E';
+        	}catch(Exception e){
         	}
         }
         
-        String mazeString = "";
+        getMaz()[(int) end.getY()][(int) end.getX()]=3;
+ 
 		// print final maze
 		for(int i=0;i<row;i++){
 			for(int j=0;j<column;j++){
-				//System.out.print(getMaz()[i][j]);
-				mazeString = mazeString.concat(Character.toString(getMaz()[i][j]));
+				System.out.print(getMaz()[i][j]);
 			}
-			//System.out.println();
-			mazeString = mazeString.concat("\n");
+			System.out.println();
 		}
-		
-		return mazeString;
 	}
-    static class Point{
-    	Integer r;
-    	Integer c;
-    	Point parent;
-    	public Point(int x, int y, Point p){
-    		r=x;c=y;parent=p;
-    	}
-    	// compute opposite node given that it is in the other direction from the parent
-    	public Point opposite(){
-    		if(this.r.compareTo(parent.r)!=0)
-    			return new Point(this.r+this.r.compareTo(parent.r),this.c,this);
-    		if(this.c.compareTo(parent.c)!=0)
-    			return new Point(this.r,this.c+this.c.compareTo(parent.c),this);
-    		return null;
-    	}
-    }
+    private ArrayList<Point> getNGH(Point curr, ArrayList<Point> cameFrom) {
+    	ArrayList<Point> ls = new ArrayList<Point>();
+        for(int i = -1;i<=1;i++){
+        	for(int j = -1;j<= 1;j++){
+        		if(i==0 && j==0 || i!=0 && j!=0){
+        			continue;
+        		}	
+        		try{
+        			if(getMaz()[(int) (curr.getY()+i)][(int) (curr.getX()+j)]==1) continue;
+        		}catch(Exception e){
+        			//skip
+        			continue;
+        		}
+        		ls.add(new Point((int) (curr.getX()+i),(int) curr.getY()+j));
+        		cameFrom.add(curr);
+        	}
+        }
+		return ls;
+	}
 }
