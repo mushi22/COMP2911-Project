@@ -35,7 +35,7 @@ public class ApplicationUI extends JFrame {
 	public ApplicationUI() throws IOException {
 		setTitle("Maze Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 843, 547);
+		setBounds(100, 100, 1000, 1000);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -77,21 +77,26 @@ public class ApplicationUI extends JFrame {
 					int row = 0;
 					int column = 0;
 					if (menuName.equals("Beginner")) {
-						row = 5;
-						column = 5;
-					} else if (menuName.equals("Intermediate")) {
-						row = 10;
-						column = 10;
-					} else if (menuName.equals("Advanced")) {
-						row = 15;
-						column = 15;
-					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE
 						row = 20;
 						column = 20;
+					} else if (menuName.equals("Intermediate")) {
+						row = 40;
+						column = 40;
+					} else if (menuName.equals("Advanced")) {
+						row = 60;
+						column = 60;
+					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE, has to be square/ larger than 20
+						row = 100;
+						column = 100;
 					}
-					
+					System.out.println("Hello");
 					text = mz.generateMaze(row, column);
-					mazePanel.setTextTESTING(text);
+					//mazePanel.setTextTESTING(text);
+					mazePanel.removeAll();
+					mazePanel.drawMaze(mz.getMaz());
+					//mazePanel.addPic();
+					mazePanel.revalidate();
+					mazePanel.repaint();
 				} else if (menuName.equals("Restart")) {
 					//mazePanel.setTextTESTING(text);
 					//USING THIS FOR DEBUG -> LOADING GRAPHICS RESOURCES
@@ -111,7 +116,7 @@ public class ApplicationUI extends JFrame {
 				} else if (menuName.equals("Instructions")) {
 					mazePanel.setTextTESTING(text);
 				} else if (menuName.equals("About Us")) {
-					JOptionPane.showMessageDialog(mazePanel, "Create by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(mazePanel, "Created by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
 				}
 			}
 		});

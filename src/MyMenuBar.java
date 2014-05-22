@@ -114,7 +114,7 @@ public class MyMenuBar extends JMenuBar{
 	public void fireEvent(MenuBarEvent event) {
 		Object[] listeners = listenerList.getListenerList();
 		
-		for(int i = 0; i < listeners.length; i += 2) {
+		for(int i = 0; i < listeners.length - 1; i += 2) {
 			if(listeners[i] == MenuBarListener.class) {
 				((MenuBarListener) listeners[i+1]).menuBarEventOccured(event); 
 			}

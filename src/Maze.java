@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.awt.Point;
 
 
@@ -12,7 +13,8 @@ import java.awt.Point;
  */
 
 public class Maze {
-	private static final int START = 2;
+	public static final int START = 2;
+	public static final int END = 3;
 	private int[][] maz;
 	private Point start;
 	private Point end;
@@ -46,21 +48,22 @@ public class Maze {
         //	getMaz()[x] = tRow;
         //}
         
-        start = new Point((int)(Math.random()*row),(int)(Math.random()*column));
+        //start = new Point((int)(Math.random()*row),(int)(Math.random()*column));
+        start = new Point(0, 0);
         getMaz()[(int) start.getY()][(int) start.getX()] = START;
         
         // get neighbours (each key has a value of where it came from)
-        ArrayList<Point> cameFrom = new ArrayList<Point>();
-        ArrayList<Point> ngh = getNGH(start, cameFrom);
+        ArrayList<Point> nextLine = new ArrayList<Point>();
+        ArrayList<Point> ngh = getNGH(start, nextLine);
         		
  
-        end=null;
+        ArrayList<Point> endps=new ArrayList<Point>();
         while(!ngh.isEmpty()){
  
         	// pick current node at random
         	int temp = (int)(Math.random()*ngh.size());
         	Point currentnode = ngh.remove(temp);
-        	Point currentopp = cameFrom.remove(temp);
+        	Point currentopp = nextLine.remove(temp);
         	
         	
         	int diffy = (int) (currentnode.getY() - currentopp.getY());
@@ -79,23 +82,28 @@ public class Maze {
     				getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]=1;
  
     				// store end node in order to mark it later
-    				end = currentopp;
+    				endps.add(currentopp);
  
         				// iterate through direct neighbors of node, same as earlier
-    				ngh.addAll(getNGH(currentopp,cameFrom));
+    				ngh.addAll(getNGH(currentopp,nextLine));
         		}
         	}catch(Exception e){
+        		//System.out.println("fgdsjkfgjhdsgkf");
         	}
         }
         
-        getMaz()[(int) end.getY()][(int) end.getX()]=3;
+        do{
+        	int ind = new Random().nextInt(endps.size());
+        	end = endps.get(ind);
+        }while(end.getX() < 7*maz[0].length/8 || end.getY() < 7*maz.length/8);
+        getMaz()[(int) end.getY()][(int) end.getX()]=END;
  
         String mazeString = "";
         
 		// print final maze
 		for(int i=0;i<row;i++){
 			for(int j=0;j<column;j++){
-				//System.out.print(getMaz()[i][j]);
+				//System.out.println(getMaz()[i][j]);
 				mazeString = mazeString.concat(Integer.toString(getMaz()[i][j]));
 			}
 			mazeString = mazeString.concat("\n");
@@ -103,7 +111,7 @@ public class Maze {
 		
 		return mazeString;
 	}
-    private ArrayList<Point> getNGH(Point curr, ArrayList<Point> cameFrom) {
+    private ArrayList<Point> getNGH(Point curr, ArrayList<Point> nextLine) {
     	ArrayList<Point> ls = new ArrayList<Point>();
         for(int i = -1;i<=1;i++){
         	for(int j = -1;j<= 1;j++){
@@ -117,7 +125,7 @@ public class Maze {
         			continue;
         		}
         		ls.add(new Point((int) (curr.getX()+i),(int) curr.getY()+j));
-        		cameFrom.add(curr);
+        		nextLine.add(curr);
         	}
         }
 		return ls;
