@@ -31,7 +31,6 @@ public class MyMazePanel extends JPanel {
 	}
 	
 	private void initGraphics() {
-		String path = System.getProperty("user.dir");
 		File file = new File("Graphics/Neon Wall Sprite 1.png");
 		BufferedImage image = null;
 		try {
@@ -43,7 +42,6 @@ public class MyMazePanel extends JPanel {
 		}
 		neonWall1 = image;
 		
-		path = System.getProperty("user.dir");
 		file = new File("Graphics/Neon Wall Sprite 2.png");
 		try {
 			image = ImageIO.read(file); //Add IO HANDLING
