@@ -1,9 +1,16 @@
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import java.awt.GridLayout;
 
 
 public class MyMazePanel extends JPanel {
@@ -11,29 +18,43 @@ public class MyMazePanel extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws IOException
 	 */
-	public MyMazePanel() {
+	public MyMazePanel() throws IOException {
 		setBackground(Color.DARK_GRAY);
-		
-		GridBagLayout gbl_MazePanel = new GridBagLayout();
-		gbl_MazePanel.columnWidths = new int[]{0, 0};
-		gbl_MazePanel.rowHeights = new int[]{0, 0};
-		gbl_MazePanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_MazePanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		setLayout(gbl_MazePanel);
+		setLayout(new GridLayout(0, 3, 0, 0));
 		
 		txtrPlaceholderForGraphicsd = new JTextArea();
-		//txtrPlaceholderForGraphicsd.setText("PLACEHOLDER FOR GRAPHICS2D");
-		GridBagConstraints gbc_txtrPlaceholderForGraphicsd = new GridBagConstraints();
-		gbc_txtrPlaceholderForGraphicsd.fill = GridBagConstraints.BOTH;
-		gbc_txtrPlaceholderForGraphicsd.gridx = 0;
-		gbc_txtrPlaceholderForGraphicsd.gridy = 0;
-		add(txtrPlaceholderForGraphicsd, gbc_txtrPlaceholderForGraphicsd);
+		add(txtrPlaceholderForGraphicsd);
+		
+		String path = System.getProperty("user.dir");
+		System.out.println(path + "\\Graphics\\Player Sprite.png");
+		File file = new File(path + "\\Graphics\\Player Sprite.png");
+		try {
+			image = ImageIO.read(file); //Add IO HANDLING
+			JLabel picLabel = new JLabel(new ImageIcon(image));
+			add(picLabel);
+		} catch (IOException ex) {
+			// handle exception ...
+		}
+		
+		path = System.getProperty("user.dir");
+		System.out.println(path + "\\Graphics\\Neon Wall Sprite 1.png");
+		file = new File(path + "\\Graphics\\Neon Wall Sprite 1.png");
+		try {
+			image = ImageIO.read(file); //Add IO HANDLING
+			JLabel picLabel = new JLabel(new ImageIcon(image));
+			add(picLabel);
+		} catch (IOException ex) {
+			// handle exception ...
+		}
+		
 	}
 	
 	public void setTextTESTING(String text) {
 		txtrPlaceholderForGraphicsd.setText(text);
 	}
-	
+
+	private BufferedImage image;
 	private JTextArea txtrPlaceholderForGraphicsd;
 }
