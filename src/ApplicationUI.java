@@ -103,7 +103,7 @@ public class ApplicationUI extends JFrame {
 						row = 100;
 						column = 100;
 					}
-					System.out.println("Hello");
+					//System.out.println("Hello");
 					text = mz.generateMaze(row, column);
 					
 					int pHeight = mazePanel.getHeight();
