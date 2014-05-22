@@ -38,7 +38,7 @@ public class Maze {
     }
  
 
-	public void generateMaze(int row, int column){
+	public String generateMaze(int row, int column){
         //default value of 0 for arrays of integral types is guaranteed by the language spec
         //int[] tRow= new int[column];
         setMaz(row, column);
@@ -90,13 +90,18 @@ public class Maze {
         
         getMaz()[(int) end.getY()][(int) end.getX()]=3;
  
+        String mazeString = "";
+        
 		// print final maze
 		for(int i=0;i<row;i++){
 			for(int j=0;j<column;j++){
-				System.out.print(getMaz()[i][j]);
+				//System.out.print(getMaz()[i][j]);
+				mazeString = mazeString.concat(Integer.toString(getMaz()[i][j]));
 			}
-			System.out.println();
+			mazeString = mazeString.concat("\n");
 		}
+		
+		return mazeString;
 	}
     private ArrayList<Point> getNGH(Point curr, ArrayList<Point> cameFrom) {
     	ArrayList<Point> ls = new ArrayList<Point>();

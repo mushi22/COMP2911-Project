@@ -1,6 +1,7 @@
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import java.awt.GridLayout;
 
 
 public class MyMazePanel extends JPanel {
@@ -32,6 +32,7 @@ public class MyMazePanel extends JPanel {
 		File file = new File(path + "\\Graphics\\Player Sprite.png");
 		try {
 			image = ImageIO.read(file); //Add IO HANDLING
+			resize(image, 100, 100);
 			JLabel picLabel = new JLabel(new ImageIcon(image));
 			add(picLabel);
 		} catch (IOException ex) {
@@ -42,7 +43,8 @@ public class MyMazePanel extends JPanel {
 		System.out.println(path + "\\Graphics\\Neon Wall Sprite 1.png");
 		file = new File(path + "\\Graphics\\Neon Wall Sprite 1.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
+			image = ImageIO.read(file); //Add IO HANDLING\
+			resize(image, 100, 100);
 			JLabel picLabel = new JLabel(new ImageIcon(image));
 			add(picLabel);
 		} catch (IOException ex) {
@@ -53,6 +55,15 @@ public class MyMazePanel extends JPanel {
 	
 	public void setTextTESTING(String text) {
 		txtrPlaceholderForGraphicsd.setText(text);
+	}
+	
+	public static BufferedImage resize(BufferedImage image, int width, int height) {
+	    BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+	    Graphics2D g2d = (Graphics2D) bi.createGraphics();
+	    g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+	    g2d.drawImage(image, 0, 0, width, height, null);
+	    g2d.dispose();
+	    return bi;
 	}
 
 	private BufferedImage image;
