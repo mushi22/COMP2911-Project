@@ -32,7 +32,7 @@ public class MyMazePanel extends JPanel {
 		File file = new File(path + "\\Graphics\\Player Sprite.png");
 		try {
 			image = ImageIO.read(file); //Add IO HANDLING
-			resize(image, 100, 100);
+			image = resize(image, 200, 200);
 			JLabel picLabel = new JLabel(new ImageIcon(image));
 			add(picLabel);
 		} catch (IOException ex) {
@@ -44,7 +44,7 @@ public class MyMazePanel extends JPanel {
 		file = new File(path + "\\Graphics\\Neon Wall Sprite 1.png");
 		try {
 			image = ImageIO.read(file); //Add IO HANDLING\
-			resize(image, 100, 100);
+			image = resize(image, 200, 200);
 			JLabel picLabel = new JLabel(new ImageIcon(image));
 			add(picLabel);
 		} catch (IOException ex) {
