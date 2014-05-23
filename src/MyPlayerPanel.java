@@ -52,7 +52,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(getHeight() + getWidth());
 		if (x < 0) {
 			x = 0;
 			delX = 0;
