@@ -84,12 +84,11 @@ public class ApplicationUI extends JFrame {
 		menuBar.addMenuBarListener(new MenuBarListener() {
 			public void menuBarEventOccured(MenuBarEvent event) {
 				String menuName = event.getMenuName();
-				String text = event.getText();	//Change to COMMAND!
+				command = event.getText();	//Change to COMMAND!
 				
 				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced") || menuName.equals("Custom")) {
-					Maze mz = new Maze();
-					int row = 0;
-					int column = 0;
+					row = 0;
+					column = 0;
 					if (menuName.equals("Beginner")) {
 						row = 20;
 						column = 20;
@@ -103,39 +102,10 @@ public class ApplicationUI extends JFrame {
 						row = 100;
 						column = 100;
 					}
-					//System.out.println("Hello");
-					text = mz.generateMaze(row, column);
 					
-					int pHeight = mazePanel.getHeight();
-					int pWidth = mazePanel.getWidth();
-					
-					//neonWall1 = image;
-					int mHeight = mz.getMaz().length;
-					int mWidth = mz.getMaz()[0].length;
-					
-					resizeEverything(pWidth/mWidth, pHeight/mHeight);
-					//mazePanel.setTextTESTING(text);
-					mazePanel.removeAll();
-					playerPanel.removeAll();
-					mazePanel.drawMaze(mz.getMaz(), rock4);
-					playerPanel.drawPlayer(mz.getMaz(),player,rock1);
-					//mazePanel.addPic();
-					
-					mazePanel.revalidate();
-					mazePanel.repaint();
-					playerPanel.revalidate();
-					playerPanel.repaint();
+					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
-					//mazePanel.setTextTESTING(text);
-					//USING THIS FOR DEBUG -> LOADING GRAPHICS RESOURCES
-					String path = System.getProperty("user.dir");
-					System.out.println(path + "\\Graphics\\Neon Wall Sprite 1.png");
-					File file = new File(path + "\\Graphics\\Neon Wall Sprite 1.png");
-					
-					if(!file.exists()) {
-						System.out.println("Something is broken :(");
-					}
-					
+					paintNewMaze();
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
@@ -234,8 +204,26 @@ public class ApplicationUI extends JFrame {
 	
 	}
 	
-	public void setTextTESTING(String text) {
-		//txtrPlaceholderForGraphicsd.setText(text);
+	private void paintNewMaze() {
+		Maze mz = new Maze();
+		command = mz.generateMaze(row, column);
+		
+		int pHeight = mazePanel.getHeight();
+		int pWidth = mazePanel.getWidth();
+		
+		int mHeight = mz.getMaz().length;
+		int mWidth = mz.getMaz()[0].length;
+		
+		resizeEverything(pWidth/mWidth, pHeight/mHeight);
+		mazePanel.removeAll();
+		playerPanel.removeAll();
+		mazePanel.drawMaze(mz.getMaz(), rock4);
+		playerPanel.drawPlayer(mz.getMaz(),player,rock1);
+		
+		mazePanel.revalidate();
+		mazePanel.repaint();
+		playerPanel.revalidate();
+		playerPanel.repaint();
 	}
 	
 	
@@ -273,4 +261,8 @@ public class ApplicationUI extends JFrame {
 	private MyMazePanel mazePanel;
 	private MyInfoPanel infoPanel;
 	private MyPlayerPanel playerPanel;
+	
+	private int row;
+	private int column;
+	private String command;
 }

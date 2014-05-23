@@ -17,7 +17,7 @@ public class MyMazePanel extends JPanel {
 	 */
 	public MyMazePanel() throws IOException {
 		setBackground(Color.BLACK);
-		setLayout(new GridLayout(1, 3, 0, 0));
+		//setLayout(new GridLayout(1, 3, 0, 0));
 		
 		//txtrPlaceholderForGraphicsd = new JTextArea();
 		//add(txtrPlaceholderForGraphicsd);
@@ -44,8 +44,8 @@ public class MyMazePanel extends JPanel {
 		for(int i = 0; i < mWidth; i++){
 			for(int j = 0; j < mHeight; j++){
 				if(maz[i][j]== 0){
-					JLabel picLabel1 = new JLabel(new ImageIcon(sprite));
-					this.add(picLabel1);
+					JLabel picLabel = new JLabel(new ImageIcon(sprite));
+					this.add(picLabel);
 				//}else if(maz[i][j] == Maze.START){
 				//	this.add(new JLabel(new ImageIcon(player)));
 				//}else if(maz[i][j] == Maze.END){
