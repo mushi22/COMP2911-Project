@@ -142,6 +142,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		neonWall1 = image;
+		neonWall1Orig = image;
 		
 		file = new File("Graphics/Neon Wall Sprite 2.png");
 		try {
@@ -152,6 +153,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		neonWall2 = image;
+		neonWall2Orig = image;
 		
 		file = new File("Graphics/Player Sprite.png");
 		try {
@@ -162,6 +164,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		player = image;
+		playerOrig = image;
 		
 		file = new File("Graphics/rock sprite 1.png");
 		try {
@@ -172,7 +175,8 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		rock1 = image;
-
+		rock1Orig = image;
+		
 		file = new File("Graphics/rock sprite 2.png");
 		try {
 			image = ImageIO.read(file); //Add IO HANDLING
@@ -182,6 +186,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		rock2 = image;
+		rock2Orig = image;
 		
 		file = new File("Graphics/rock sprite 3.png");
 		try {
@@ -192,6 +197,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		rock3 = image;
+		rock3Orig = image;
 		
 		file = new File("Graphics/rock sprite 4.png");
 		try {
@@ -202,6 +208,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		rock4 = image;
+		rock4Orig = image;
 		
 		file = new File("Graphics/Wall Sprite 1.png");
 		try {
@@ -212,7 +219,7 @@ public class ApplicationUI extends JFrame {
 			// handle exception ...
 		}
 		wall = image;
-	
+		wallOrig = image;
 	}
 	
 	private void paintNewMaze() {
@@ -246,16 +253,25 @@ public class ApplicationUI extends JFrame {
 	}
 	
 	private void resizeEverything (int width, int height){
-		neonWall1 = resize(neonWall1, width, height);
-		neonWall2 = resize(neonWall2, width, height);
-		player = resize(player, width, height);
-		rock1 = resize(rock1, width, height);
-		rock2 = resize(rock2, width, height);
-		rock3 = resize(rock3, width, height);
-		rock4 = resize(rock4, width, height);
-		wall = resize(wall, width, height);
+		neonWall1 = resize(neonWall1Orig, width, height);
+		neonWall2 = resize(neonWall2Orig, width, height);
+		player = resize(playerOrig, width, height);
+		rock1 = resize(rock1Orig, width, height);
+		rock2 = resize(rock2Orig, width, height);
+		rock3 = resize(rock3Orig, width, height);
+		rock4 = resize(rock4Orig, width, height);
+		wall = resize(wallOrig, width, height);
 	}
 
+	private BufferedImage neonWall1Orig;
+	private BufferedImage neonWall2Orig;
+	private BufferedImage playerOrig;
+	private BufferedImage rock1Orig;
+	private BufferedImage rock2Orig;
+	private BufferedImage rock3Orig;
+	private BufferedImage rock4Orig;
+	private BufferedImage wallOrig;
+	
 	private BufferedImage neonWall1;
 	private BufferedImage neonWall2;
 	private BufferedImage player;
