@@ -39,6 +39,12 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		setFocusTraversalKeysEnabled(false); //No shift/tab keys
 		this.playerSprite = playerSprite;
 	}
+	public void restartPlayer(){
+		x = 0;
+		y = 0;
+		delX = 0;
+		delY = 0;
+	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

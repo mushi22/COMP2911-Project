@@ -70,13 +70,13 @@ public class ApplicationUI extends JFrame {
 		gbc_MazePanel.gridy = 0;
 		layeredPane.add(mazePanel, gbc_MazePanel, 1);
 		
-/*		playerPanel = new MyPlayerPanel(player);
+		playerPanel = new MyPlayerPanel(player);
 		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
 		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
 		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
 		gbc_PlayerPanel.gridx = 0;
 		gbc_PlayerPanel.gridy = 0;
-		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);*/
+		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
 		
 		/*Info Section*/
 		infoPanel = new MyInfoPanel();
@@ -110,7 +110,6 @@ public class ApplicationUI extends JFrame {
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
 					paintNewMaze();
-					paintNewPlayer();
 				} else if (menuName.equals("Restart")) {
 					if(row != 0 && column != 0) {
 						paintNewMaze();
@@ -231,16 +230,9 @@ public class ApplicationUI extends JFrame {
 		
 		mazePanel.revalidate();
 		mazePanel.repaint();
-	}
-	
-	private void paintNewPlayer() {
-		playerPanel = new MyPlayerPanel(player);
-		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
-		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
-		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
-		gbc_PlayerPanel.gridx = 0;
-		gbc_PlayerPanel.gridy = 0;
-		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
+		
+		playerPanel.revalidate();
+		playerPanel.repaint();
 	}
 	
 	//TODO: re-do this so its legit ;).
