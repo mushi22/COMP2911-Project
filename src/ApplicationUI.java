@@ -41,7 +41,8 @@ public class ApplicationUI extends JFrame {
 	public ApplicationUI() throws IOException {
 		setTitle("Maze Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1000, 1000);
+		//setBounds(100, 100, 1000, 1000);
+		setSize(1000,1000);
 		setResizable(false);
 		initGraphics();
 		
@@ -78,6 +79,7 @@ public class ApplicationUI extends JFrame {
 		gbc_PlayerPanel.gridy = 0;
 		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
 		
+		System.out.println(playerPanel.getHeight() + playerPanel.getWidth());
 		/*Info Section*/
 		infoPanel = new MyInfoPanel();
 		GridBagConstraints gbc_infoPanel = new GridBagConstraints();
