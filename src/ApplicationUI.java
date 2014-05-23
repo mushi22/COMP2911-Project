@@ -78,8 +78,7 @@ public class ApplicationUI extends JFrame {
 		gbc_PlayerPanel.gridx = 0;
 		gbc_PlayerPanel.gridy = 0;
 		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
-		
-		System.out.println(playerPanel.getHeight() + playerPanel.getWidth());
+
 		/*Info Section*/
 		infoPanel = new MyInfoPanel();
 		GridBagConstraints gbc_infoPanel = new GridBagConstraints();
@@ -233,7 +232,7 @@ public class ApplicationUI extends JFrame {
 		mazePanel.revalidate();
 		mazePanel.repaint();
 		
-		playerPanel.restartPlayer();
+		playerPanel.restartPlayer(player);
 	}
 	
 	//TODO: re-do this so its legit ;).

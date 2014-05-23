@@ -39,7 +39,10 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		setFocusTraversalKeysEnabled(false); //No shift/tab keys
 		this.playerSprite = playerSprite;
 	}
-	public void restartPlayer(){
+	
+	
+	public void restartPlayer(BufferedImage playerSprite){
+		this.playerSprite = playerSprite;
 		x = 0;
 		y = 0;
 		delX = 0;
@@ -52,23 +55,25 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		System.out.println(getHeight() + " " + getWidth());
 		if (x < 0) {
 			x = 0;
 			delX = 0;
-		} else if (x > 500) {
-			x = 500;
+		} else if (x > this.getWidth()) {
+			x = this.getWidth();
 			delX = 0;
 		}
 		
 		if (y < 0) {
 			y = 0;
 			delY = 0;
-		} else if (y > 500) {
-			y = 500;
+		} else if (y > getHeight()) {
+			y = this.getHeight();
 			delY = 0;
 		}
 		x = x + delX;
 		y = y + delY;
+		System.out.println(x + " " + y);
 		repaint();
 	}
 	
