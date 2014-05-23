@@ -231,8 +231,7 @@ public class ApplicationUI extends JFrame {
 		mazePanel.revalidate();
 		mazePanel.repaint();
 		
-		playerPanel.revalidate();
-		playerPanel.repaint();
+		playerPanel.restartPlayer();
 	}
 	
 	//TODO: re-do this so its legit ;).
