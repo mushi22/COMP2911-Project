@@ -92,7 +92,7 @@ public class ApplicationUI extends JFrame {
 		menuBar.addMenuBarListener(new MenuBarListener() {
 			public void menuBarEventOccured(MenuBarEvent event) {
 				String menuName = event.getMenuName();
-				command = event.getText();	//Change to COMMAND!
+				command = event.getText();
 				
 				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced") || menuName.equals("Custom")) {
 					if (menuName.equals("Beginner")) {
