@@ -19,7 +19,7 @@ public class MyMazePanel extends JPanel {
 		setBackground(Color.BLACK);	
 	}
 	
-	public void drawMaze(int[][] maz, BufferedImage sprite) {
+	public void drawMaze(int[][] maz, BufferedImage sprite, BufferedImage spriteEnd) {
 		int mHeight = maz.length;
 		int mWidth = maz[0].length;
 		
@@ -29,9 +29,10 @@ public class MyMazePanel extends JPanel {
 				if(maz[i][j]== 0){
 					JLabel picLabel = new JLabel(new ImageIcon(sprite));
 					this.add(picLabel);
-				} else{
+				} else if(maz[i][j] == Maze.END){
+					this.add(new JLabel(new ImageIcon(spriteEnd)));
+				}  else{
 					add(new JLabel());
-					
 				}
 			}
 		}

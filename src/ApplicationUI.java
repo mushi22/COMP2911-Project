@@ -1,3 +1,4 @@
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
@@ -10,6 +11,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 
@@ -41,13 +43,19 @@ public class ApplicationUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 1000);
 		setResizable(false);
+		initGraphics();
+		
+		Container mainPane = getContentPane();
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setOpaque(false);
+		mainPane.add(layeredPane);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{10.0, 0.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
+		layeredPane.setLayout(gridBagLayout);
 		
 		/*Menu Bar*/
 		menuBar = new MyMenuBar();
@@ -60,15 +68,15 @@ public class ApplicationUI extends JFrame {
 		gbc_MazePanel.fill = GridBagConstraints.BOTH;
 		gbc_MazePanel.gridx = 0;
 		gbc_MazePanel.gridy = 0;
-		getContentPane().add(mazePanel, gbc_MazePanel);
+		layeredPane.add(mazePanel, gbc_MazePanel, 1);
 		
-		playerPanel = new MyPlayerPanel();
+		playerPanel = new MyPlayerPanel(player);
 		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
 		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
 		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
 		gbc_PlayerPanel.gridx = 0;
 		gbc_PlayerPanel.gridy = 0;
-		getContentPane().add(playerPanel, gbc_PlayerPanel);
+		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
 		
 		/*Info Section*/
 		infoPanel = new MyInfoPanel();
@@ -77,10 +85,8 @@ public class ApplicationUI extends JFrame {
 		gbc_infoPanel.fill = GridBagConstraints.BOTH;
 		gbc_infoPanel.gridx = 0;
 		gbc_infoPanel.gridy = 1;
-		getContentPane().add(infoPanel, gbc_infoPanel);
+		layeredPane.add(infoPanel, gbc_infoPanel);
 		
-		
-		initGraphics();
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
 			public void menuBarEventOccured(MenuBarEvent event) {
@@ -220,14 +226,10 @@ public class ApplicationUI extends JFrame {
 		
 		resizeEverything(pWidth/mWidth, pHeight/mHeight);
 		mazePanel.removeAll();
-		playerPanel.removeAll();
-		mazePanel.drawMaze(mz.getMaz(), rock4);
-		playerPanel.drawPlayer(mz.getMaz(),player,rock1);
+		mazePanel.drawMaze(mz.getMaz(), rock4, rock1);
 		
 		mazePanel.revalidate();
 		mazePanel.repaint();
-		playerPanel.revalidate();
-		playerPanel.repaint();
 	}
 	
 	
