@@ -16,7 +16,7 @@ public class MyMazePanel extends JPanel {
 	 * @throws IOException
 	 */
 	public MyMazePanel() throws IOException {
-		setBackground(Color.BLACK);	
+		setBackground(Color.LIGHT_GRAY);	
 	}
 	
 	public void drawMaze(int[][] maz, BufferedImage sprite, BufferedImage spriteEnd) {
