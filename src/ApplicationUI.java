@@ -88,8 +88,6 @@ public class ApplicationUI extends JFrame {
 				command = event.getText();	//Change to COMMAND!
 				
 				if (menuName.equals("Beginner") || menuName.equals("Intermediate") || menuName.equals("Advanced") || menuName.equals("Custom")) {
-					row = 0;
-					column = 0;
 					if (menuName.equals("Beginner")) {
 						row = 20;
 						column = 20;
@@ -102,18 +100,23 @@ public class ApplicationUI extends JFrame {
 					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE, has to be square/ larger than 20
 						row = 100;
 						column = 100;
+						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
-					
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
-					paintNewMaze();
+					if(row != 0 && column != 0) {
+						paintNewMaze();
+					} else {
+						JOptionPane.showMessageDialog(mazePanel, "You need to start a game first!", "Error", JOptionPane.PLAIN_MESSAGE);
+					}
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
 						System.exit(0);
 					}
 				} else if (menuName.equals("Instructions")) {
-					//mazePanel.setTextTESTING(text);
+					
 				} else if (menuName.equals("About Us")) {
 					JOptionPane.showMessageDialog(mazePanel, "Created by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
 				}
