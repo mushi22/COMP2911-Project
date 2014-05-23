@@ -1,13 +1,10 @@
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -30,8 +27,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	private BufferedImage playerSprite;
 	
 	public MyPlayerPanel(BufferedImage playerSprite){
-/*		setLayout(new GridLayout(1, 3, 0, 0));
-		setBackground(new Color(0,0,0,0));*/
 		setOpaque(false);
 		x = 0;
 		y = 0;
@@ -80,26 +75,4 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		delX = 0;
 		delY = 0;
 	}
-		
-		public void drawPlayer(int[][] maz, BufferedImage spriteStart) {
-			
-			//neonWall1 = image;
-			int mHeight = maz.length;
-			int mWidth = maz[0].length;
-			
-			//neonWall1 = resize(image, pWidth/mWidth, pHeight/mWidth);
-			
-			setLayout(new GridLayout(mHeight, mWidth, 0, 0));
-			for(int i = 0; i < mWidth; i++){
-				for(int j = 0; j < mHeight; j++){
-					if(maz[i][j] == Maze.START){
-						this.add(new JLabel(new ImageIcon(spriteStart)));
-					} else{
-						add(new JLabel());
-					}
-				
-				}
-			}
-			
-		}
 }

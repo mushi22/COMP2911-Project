@@ -46,7 +46,7 @@ public class ApplicationUI extends JFrame {
 		initGraphics();
 		
 		Container mainPane = getContentPane();
-		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		layeredPane.setOpaque(false);
 		mainPane.add(layeredPane);
 		
@@ -70,13 +70,13 @@ public class ApplicationUI extends JFrame {
 		gbc_MazePanel.gridy = 0;
 		layeredPane.add(mazePanel, gbc_MazePanel, 1);
 		
-		playerPanel = new MyPlayerPanel(player);
+/*		playerPanel = new MyPlayerPanel(player);
 		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
 		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
 		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
 		gbc_PlayerPanel.gridx = 0;
 		gbc_PlayerPanel.gridy = 0;
-		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
+		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);*/
 		
 		/*Info Section*/
 		infoPanel = new MyInfoPanel();
@@ -110,6 +110,7 @@ public class ApplicationUI extends JFrame {
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
 					paintNewMaze();
+					paintNewPlayer();
 				} else if (menuName.equals("Restart")) {
 					if(row != 0 && column != 0) {
 						paintNewMaze();
@@ -232,6 +233,15 @@ public class ApplicationUI extends JFrame {
 		mazePanel.repaint();
 	}
 	
+	private void paintNewPlayer() {
+		playerPanel = new MyPlayerPanel(player);
+		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
+		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
+		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
+		gbc_PlayerPanel.gridx = 0;
+		gbc_PlayerPanel.gridy = 0;
+		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
+	}
 	
 	//TODO: re-do this so its legit ;).
 	private BufferedImage resize(BufferedImage image, int width, int height) {
@@ -262,6 +272,8 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock3;
 	private BufferedImage rock4;
 	private BufferedImage wall;
+	
+	JLayeredPane layeredPane;
 	
 	private MyMenuBar menuBar;
 	private MyMazePanel mazePanel;
