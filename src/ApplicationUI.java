@@ -205,7 +205,7 @@ public class ApplicationUI extends JFrame {
 			//JLabel picLabel = new JLabel(new ImageIcon(image));
 			//add(picLabel);
 		} catch (IOException ex) {
-			// handle exception ...
+			// handle exception ... 
 		}
 		rock4 = image;
 		rock4Orig = image;
@@ -239,7 +239,7 @@ public class ApplicationUI extends JFrame {
 		mazePanel.revalidate();
 		mazePanel.repaint();
 		
-		playerPanel.restartPlayer(player);
+		playerPanel.restartPlayer(player, mz);
 	}
 	
 	//TODO: re-do this so its legit ;).

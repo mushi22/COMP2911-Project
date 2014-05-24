@@ -19,6 +19,15 @@ public class Maze {
 	private Point start;
 	private Point end;
 	
+	public Point getStart() {
+		return start;
+	}
+
+
+	public void setStart(Point start) {
+		this.start = start;
+	}
+	
 	public int[][] getMaz() {
 		return maz;
 	}
@@ -111,6 +120,7 @@ public class Maze {
 		
 		return mazeString;
 	}
+	
     private ArrayList<Point> getNGH(Point curr, ArrayList<Point> nextLine) {
     	ArrayList<Point> ls = new ArrayList<Point>();
         for(int i = -1;i<=1;i++){

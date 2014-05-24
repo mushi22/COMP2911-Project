@@ -25,6 +25,8 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	private int delX;
 	private int delY;
 	private BufferedImage playerSprite;
+	private Maze maz;
+	private Player p;
 	
 	public MyPlayerPanel(BufferedImage playerSprite){
 		setOpaque(false);
@@ -38,15 +40,20 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		setFocusable(true); //Enable KeyListener
 		setFocusTraversalKeysEnabled(false); //No shift/tab keys
 		this.playerSprite = playerSprite;
+		
+		p = new Player();
+		p.setPosition(x,y);
 	}
 	
 	
-	public void restartPlayer(BufferedImage playerSprite){
+	public void restartPlayer(BufferedImage playerSprite, Maze maz){
 		this.playerSprite = playerSprite;
 		x = 0;
 		y = 0;
 		delX = 0;
 		delY = 0;
+		this.maz = maz;
+		p = new Player(maz);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -70,24 +77,38 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 			y = this.getHeight() - playerSprite.getHeight();
 			delY = 0;
 		}
+		
+		if(x/playerSprite.getWidth() > p.getPosition().x)
+			p.setPosition(p.getPosition().x + 1,p.getPosition().y);
+		if(x/playerSprite.getWidth() < p.getPosition().x)
+			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
+		if(y/playerSprite.getHeight() > p.getPosition().y)
+			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
+		
+		if(y/playerSprite.getHeight() < p.getPosition().y)
+			p.setPosition(p.getPosition().x,p.getPosition().y - 1);
+		
 		x = x + delX;
 		y = y + delY;
+		
+		
+		System.out.println(p.getPosition().x + " " + p.getPosition().y);
 		repaint();
 	}
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		if (key == KeyEvent.VK_LEFT) {
+		if (key == KeyEvent.VK_LEFT && p.moveleft(maz)) {
 			delX = -SPEED;
 			delY = 0;
-		} else if (key == KeyEvent.VK_RIGHT) {
+		} else if (key == KeyEvent.VK_RIGHT && p.moveright(maz)) {
 			delX = SPEED;
 			delY = 0;
-		} else if (key == KeyEvent.VK_UP) {
+		} else if (key == KeyEvent.VK_UP && p.moveup(maz)) {
 			delX = 0;
 			delY = -SPEED;
-		} else if (key == KeyEvent.VK_DOWN) {
+		} else if (key == KeyEvent.VK_DOWN && p.movedown(maz)) {
 			delX = 0;
 			delY = SPEED;
 		}

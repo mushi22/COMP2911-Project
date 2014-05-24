@@ -11,6 +11,10 @@ public class Entity {
 	//Position of thing on the board
 	Point position;
 	
+	public Entity(){
+		position = new Point();
+	}
+	
 	void setPosition(int x, int y){
 		position.setLocation(x,y);
 	}
