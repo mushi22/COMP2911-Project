@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -11,11 +10,7 @@ import javax.swing.JPanel;
 public class MyMazePanel extends JPanel {
 	private static final long serialVersionUID = 3766751218594555709L;
 
-	/**
-	 * Create the panel.
-	 * @throws IOException
-	 */
-	public MyMazePanel() throws IOException {
+	public MyMazePanel() {
 		setBackground(Color.LIGHT_GRAY);	
 	}
 	

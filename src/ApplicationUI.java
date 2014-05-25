@@ -34,11 +34,7 @@ public class ApplicationUI extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 * @throws IOException 
-	 */
-	public ApplicationUI() throws IOException {
+	public ApplicationUI() {
 		setTitle("Maze Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 1000, 1000);
