@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 public class ApplicationUI extends JFrame {
 	private static final long serialVersionUID = 3721536444080124105L;
+	private static final int MAXSIZE = 800;
 	
 	/**
 	 * Launch the application.
@@ -38,7 +39,7 @@ public class ApplicationUI extends JFrame {
 		setTitle("Maze Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 1000, 1000);
-		setSize(1000,1000);
+		setSize(808,868);
 		setResizable(false);
 		initGraphics();
 		
@@ -51,12 +52,21 @@ public class ApplicationUI extends JFrame {
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{10.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 10.0, Double.MIN_VALUE};
 		layeredPane.setLayout(gridBagLayout);
 		
 		/*Menu Bar*/
 		menuBar = new MyMenuBar();
 		setJMenuBar(menuBar);
+		
+		/*Info Section*/
+		infoPanel = new MyInfoPanel();
+		GridBagConstraints gbc_infoPanel = new GridBagConstraints();
+		gbc_infoPanel.anchor = GridBagConstraints.WEST;
+		gbc_infoPanel.fill = GridBagConstraints.BOTH;
+		gbc_infoPanel.gridx = 0;
+		gbc_infoPanel.gridy = 0;
+		layeredPane.add(infoPanel, gbc_infoPanel);
 		
 		/*Maze Section*/
 		mazePanel = new MyMazePanel();
@@ -64,7 +74,7 @@ public class ApplicationUI extends JFrame {
 		gbc_MazePanel.insets = new Insets(0, 0, 0, 0);
 		gbc_MazePanel.fill = GridBagConstraints.BOTH;
 		gbc_MazePanel.gridx = 0;
-		gbc_MazePanel.gridy = 0;
+		gbc_MazePanel.gridy = 1;
 		layeredPane.add(mazePanel, gbc_MazePanel, 1);
 		
 		playerPanel = new MyPlayerPanel(player);
@@ -72,17 +82,8 @@ public class ApplicationUI extends JFrame {
 		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
 		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
 		gbc_PlayerPanel.gridx = 0;
-		gbc_PlayerPanel.gridy = 0;
+		gbc_PlayerPanel.gridy = 1;
 		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
-
-		/*Info Section*/
-		infoPanel = new MyInfoPanel();
-		GridBagConstraints gbc_infoPanel = new GridBagConstraints();
-		gbc_infoPanel.anchor = GridBagConstraints.WEST;
-		gbc_infoPanel.fill = GridBagConstraints.BOTH;
-		gbc_infoPanel.gridx = 0;
-		gbc_infoPanel.gridy = 1;
-		layeredPane.add(infoPanel, gbc_infoPanel);
 		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
@@ -106,6 +107,7 @@ public class ApplicationUI extends JFrame {
 						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
+					setSize(getSize(row) + 8, getSize(row) + 68);
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
 					if(row != 0 && column != 0) {
@@ -125,6 +127,12 @@ public class ApplicationUI extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private int getSize(int mazeSize) {
+		int remainder = MAXSIZE%mazeSize;
+		
+		return (MAXSIZE - remainder);
 	}
 	
 	private void initGraphics() {
@@ -221,9 +229,9 @@ public class ApplicationUI extends JFrame {
 	private void paintNewMaze() {
 		Maze mz = new Maze();
 		command = mz.generateMaze(row, column);
-		
-		int pHeight = mazePanel.getHeight();
-		int pWidth = mazePanel.getWidth();
+
+		int pHeight = getHeight() - 68;
+		int pWidth = getWidth() - 8;
 		
 		int mHeight = mz.getMaz().length;
 		int mWidth = mz.getMaz()[0].length;
@@ -235,6 +243,8 @@ public class ApplicationUI extends JFrame {
 		mazePanel.revalidate();
 		mazePanel.repaint();
 		
+		playerPanel.revalidate();
+		playerPanel.repaint();
 		playerPanel.restartPlayer(player, mz);
 	}
 	

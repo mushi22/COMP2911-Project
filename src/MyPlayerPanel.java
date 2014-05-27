@@ -6,19 +6,18 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
 /*
  * So this creates a panel of the same size as mazePanel which will still 
  *  redraw a lot and will probably be slow still. We could try make the player panel smaller 
  *  and move the panel on each press. This will probably need a different layout type.
  *  
  */
+import javax.swing.Timer;
 
 public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 3084030380611255577L;
-	public static final int SPEED = 2;
-	public static final int ANIMATION_SPEED = 5;
+	public static final int SPEED = 50;
+	public static final int ANIMATION_SPEED = 1;
 	private Timer animationTimer;
 	private int x;
 	private int y;
@@ -78,21 +77,21 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 			delY = 0;
 		}
 		
-		if(x/playerSprite.getWidth() > p.getPosition().x)
-			p.setPosition(p.getPosition().x + 1,p.getPosition().y);
-		if(x/playerSprite.getWidth() < p.getPosition().x)
-			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
-		if(y/playerSprite.getHeight() > p.getPosition().y)
-			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
+		//if(x/playerSprite.getWidth() > p.getPosition().x)
+		//	p.setPosition(p.getPosition().x + 1,p.getPosition().y);
+		//if(x/playerSprite.getWidth() < p.getPosition().x)
+		//	p.setPosition(p.getPosition().x - 1,p.getPosition().y);
+		//if(y/playerSprite.getHeight() > p.getPosition().y)
+		//	p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 		
-		if(y/playerSprite.getHeight() < p.getPosition().y)
-			p.setPosition(p.getPosition().x,p.getPosition().y - 1);
+		//if(y/playerSprite.getHeight() < p.getPosition().y)
+		//	p.setPosition(p.getPosition().x,p.getPosition().y - 1);
 		
-		x = x + delX;
-		y = y + delY;
+		//x = x + delX;
+		//y = y + delY;
 		
 		
-		System.out.println(p.getPosition().x + " " + p.getPosition().y);
+		//System.out.println(p.getPosition().x + " " + p.getPosition().y);
 		repaint();
 	}
 	
@@ -100,17 +99,26 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT && p.moveleft(maz)) {
-			delX = -SPEED;
-			delY = 0;
+			x = x - playerSprite.getWidth();
+			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
+			//delX = -SPEED;
+			//delY = 0;
 		} else if (key == KeyEvent.VK_RIGHT && p.moveright(maz)) {
-			delX = SPEED;
-			delY = 0;
+			x = x + playerSprite.getWidth();
+			p.setPosition(p.getPosition().x + 1,p.getPosition().y);
+//			delX = SPEED;
+//			delY = 0;
 		} else if (key == KeyEvent.VK_UP && p.moveup(maz)) {
-			delX = 0;
-			delY = -SPEED;
+			y = y - playerSprite.getHeight();
+			p.setPosition(p.getPosition().x,p.getPosition().y - 1);
+					
+//			delX = 0;
+//			delY = -SPEED;
 		} else if (key == KeyEvent.VK_DOWN && p.movedown(maz)) {
-			delX = 0;
-			delY = SPEED;
+			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
+			y  = y + playerSprite.getHeight();
+//			delX = 0;
+//			delY = SPEED;
 		}
 	}
 	
