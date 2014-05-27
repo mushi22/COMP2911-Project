@@ -17,7 +17,9 @@ import javax.swing.JOptionPane;
 
 public class ApplicationUI extends JFrame {
 	private static final long serialVersionUID = 3721536444080124105L;
-	private static final int MAXSIZE = 800;
+	private static final int MAXSIZE = 1000;
+	private int heightOffSet;
+	private int widthOffSet;
 	
 	/**
 	 * Launch the application.
@@ -27,7 +29,6 @@ public class ApplicationUI extends JFrame {
 			public void run() {
 				try {
 					ApplicationUI frame = new ApplicationUI();
-					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,8 +40,9 @@ public class ApplicationUI extends JFrame {
 		setTitle("Maze Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//setBounds(100, 100, 1000, 1000);
-		setSize(808,868);
+		setSize(MAXSIZE, MAXSIZE);
 		setResizable(false);
+		setVisible(true);
 		initGraphics();
 		
 		Container mainPane = getContentPane();
@@ -85,6 +87,14 @@ public class ApplicationUI extends JFrame {
 		gbc_PlayerPanel.gridy = 1;
 		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
 		
+		revalidate();
+		repaint();
+		
+
+		heightOffSet = this.getHeight() - mazePanel.getHeight();
+		widthOffSet = this.getWidth() - mazePanel.getWidth();
+		System.out.println(heightOffSet + " " + widthOffSet);
+		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
 			public void menuBarEventOccured(MenuBarEvent event) {
@@ -107,8 +117,8 @@ public class ApplicationUI extends JFrame {
 						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
-					setSize(getSize(row) + 8, getSize(row) + 68);
 					paintNewMaze();
+					
 				} else if (menuName.equals("Restart")) {
 					if(row != 0 && column != 0) {
 						paintNewMaze();
@@ -131,7 +141,6 @@ public class ApplicationUI extends JFrame {
 	
 	private int getSize(int mazeSize) {
 		int remainder = MAXSIZE%mazeSize;
-		
 		return (MAXSIZE - remainder);
 	}
 	
@@ -229,9 +238,9 @@ public class ApplicationUI extends JFrame {
 	private void paintNewMaze() {
 		Maze mz = new Maze();
 		command = mz.generateMaze(row, column);
-
-		int pHeight = getHeight() - 68;
-		int pWidth = getWidth() - 8;
+		setSize(getSize(row) + widthOffSet, getSize(row) + heightOffSet);
+		int pWidth = mazePanel.getWidth() + widthOffSet;
+		int pHeight = mazePanel.getHeight() + heightOffSet;
 		
 		int mHeight = mz.getMaz().length;
 		int mWidth = mz.getMaz()[0].length;

@@ -16,13 +16,10 @@ import javax.swing.Timer;
 
 public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 3084030380611255577L;
-	public static final int SPEED = 50;
-	public static final int ANIMATION_SPEED = 1;
+	public static final int ANIMATION_SPEED = 5;
 	private Timer animationTimer;
 	private int x;
 	private int y;
-	private int delX;
-	private int delY;
 	private BufferedImage playerSprite;
 	private Maze maz;
 	private Player p;
@@ -31,8 +28,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		setOpaque(false);
 		x = 0;
 		y = 0;
-		delX = 0;
-		delY = 0;
 		animationTimer = new Timer(ANIMATION_SPEED, this);
 		animationTimer.start();
 		addKeyListener(this);
@@ -49,8 +44,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		this.playerSprite = playerSprite;
 		x = 0;
 		y = 0;
-		delX = 0;
-		delY = 0;
 		this.maz = maz;
 		p = new Player(maz);
 	}
@@ -61,37 +54,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (x < 0) {
-			x = 0;
-			delX = 0;
-		} else if (x > this.getWidth() - playerSprite.getWidth()) {
-			x = this.getWidth() - playerSprite.getWidth();
-			delX = 0;
-		}
-		
-		if (y < 0) {
-			y = 0;
-			delY = 0;
-		} else if (y > getHeight() - playerSprite.getHeight()) {
-			y = this.getHeight() - playerSprite.getHeight();
-			delY = 0;
-		}
-		
-		//if(x/playerSprite.getWidth() > p.getPosition().x)
-		//	p.setPosition(p.getPosition().x + 1,p.getPosition().y);
-		//if(x/playerSprite.getWidth() < p.getPosition().x)
-		//	p.setPosition(p.getPosition().x - 1,p.getPosition().y);
-		//if(y/playerSprite.getHeight() > p.getPosition().y)
-		//	p.setPosition(p.getPosition().x,p.getPosition().y + 1);
-		
-		//if(y/playerSprite.getHeight() < p.getPosition().y)
-		//	p.setPosition(p.getPosition().x,p.getPosition().y - 1);
-		
-		//x = x + delX;
-		//y = y + delY;
-		
-		
-		//System.out.println(p.getPosition().x + " " + p.getPosition().y);
 		repaint();
 	}
 	
@@ -101,31 +63,20 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		if (key == KeyEvent.VK_LEFT && p.moveleft(maz)) {
 			x = x - playerSprite.getWidth();
 			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
-			//delX = -SPEED;
-			//delY = 0;
 		} else if (key == KeyEvent.VK_RIGHT && p.moveright(maz)) {
 			x = x + playerSprite.getWidth();
 			p.setPosition(p.getPosition().x + 1,p.getPosition().y);
-//			delX = SPEED;
-//			delY = 0;
 		} else if (key == KeyEvent.VK_UP && p.moveup(maz)) {
 			y = y - playerSprite.getHeight();
 			p.setPosition(p.getPosition().x,p.getPosition().y - 1);
-					
-//			delX = 0;
-//			delY = -SPEED;
 		} else if (key == KeyEvent.VK_DOWN && p.movedown(maz)) {
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 			y  = y + playerSprite.getHeight();
-//			delX = 0;
-//			delY = SPEED;
 		}
 	}
 	
 
 	public void keyTyped(KeyEvent arg0) {}
 	public void keyReleased(KeyEvent arg0) {
-		delX = 0;
-		delY = 0;
 	}
 }

@@ -22,8 +22,7 @@ public class MyMazePanel extends JPanel {
 		for(int i = 0; i < mWidth; i++){
 			for(int j = 0; j < mHeight; j++){
 				if(maz[i][j]== 0){
-					JLabel picLabel = new JLabel(new ImageIcon(sprite));
-					this.add(picLabel);
+					this.add(new JLabel(new ImageIcon(sprite)));
 				} else if(maz[i][j] == Maze.END){
 					this.add(new JLabel(new ImageIcon(spriteEnd)));
 				}  else{
