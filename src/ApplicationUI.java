@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class ApplicationUI extends JFrame {
 	private static final long serialVersionUID = 3721536444080124105L;
-	private static final int MAXSIZE = 1000;
+	private static final int MAXSIZE = 800;
 	private int heightOffSet;
 	private int widthOffSet;
 	
@@ -28,7 +28,7 @@ public class ApplicationUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ApplicationUI frame = new ApplicationUI();
+					new ApplicationUI();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
