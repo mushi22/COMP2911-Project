@@ -28,7 +28,8 @@ public class ApplicationUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new ApplicationUI();
+					ApplicationUI frame = new ApplicationUI();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,7 +43,6 @@ public class ApplicationUI extends JFrame {
 		//setBounds(100, 100, 1000, 1000);
 		setSize(MAXSIZE, MAXSIZE);
 		setResizable(false);
-		setVisible(true);
 		initGraphics();
 		
 		Container mainPane = getContentPane();
@@ -86,14 +86,6 @@ public class ApplicationUI extends JFrame {
 		gbc_PlayerPanel.gridx = 0;
 		gbc_PlayerPanel.gridy = 1;
 		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
-		
-		revalidate();
-		repaint();
-		
-
-		heightOffSet = this.getHeight() - mazePanel.getHeight();
-		widthOffSet = this.getWidth() - mazePanel.getWidth();
-		System.out.println(heightOffSet + " " + widthOffSet);
 		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
@@ -238,9 +230,16 @@ public class ApplicationUI extends JFrame {
 	private void paintNewMaze() {
 		Maze mz = new Maze();
 		command = mz.generateMaze(row, column);
+		
+		heightOffSet = this.getHeight() - mazePanel.getHeight();
+		widthOffSet = this.getWidth() - mazePanel.getWidth();
+		
 		setSize(getSize(row) + widthOffSet, getSize(row) + heightOffSet);
-		int pWidth = mazePanel.getWidth() + widthOffSet;
-		int pHeight = mazePanel.getHeight() + heightOffSet;
+		revalidate();
+		repaint();
+		
+		int pWidth = mazePanel.getWidth();
+		int pHeight = mazePanel.getHeight();
 		
 		int mHeight = mz.getMaz().length;
 		int mWidth = mz.getMaz()[0].length;
