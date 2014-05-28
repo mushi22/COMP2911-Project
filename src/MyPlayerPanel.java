@@ -73,7 +73,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 			y  = y + playerSprite.getHeight();
 		}
-		//System.out.println(playerSprite.getWidth() + " " +playerSprite.getHeight());
 	}
 	
 
