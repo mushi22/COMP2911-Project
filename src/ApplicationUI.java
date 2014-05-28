@@ -75,21 +75,21 @@ public class ApplicationUI extends JFrame {
 		layeredPane.add(infoPanel, gbc_infoPanel);
 		
 		/*Maze Section*/
+		GridBagConstraints gbc_MazeSection = new GridBagConstraints();
+		gbc_MazeSection.insets = new Insets(0, 0, 0, 0);
+		gbc_MazeSection.fill = GridBagConstraints.BOTH;
+		gbc_MazeSection.gridx = 0;
+		gbc_MazeSection.gridy = 1;
+		
 		mazePanel = new MyMazePanel();
-		GridBagConstraints gbc_MazePanel = new GridBagConstraints();
-		gbc_MazePanel.insets = new Insets(0, 0, 0, 0);
-		gbc_MazePanel.fill = GridBagConstraints.BOTH;
-		gbc_MazePanel.gridx = 0;
-		gbc_MazePanel.gridy = 1;
-		layeredPane.add(mazePanel, gbc_MazePanel, 1);
+		
+		layeredPane.add(mazePanel, gbc_MazeSection, 2);
 		
 		playerPanel = new MyPlayerPanel(player);
-		GridBagConstraints gbc_PlayerPanel = new GridBagConstraints();
-		gbc_PlayerPanel.insets = new Insets(0, 0, 0, 0);
-		gbc_PlayerPanel.fill = GridBagConstraints.BOTH;
-		gbc_PlayerPanel.gridx = 0;
-		gbc_PlayerPanel.gridy = 1;
-		layeredPane.add(playerPanel, gbc_PlayerPanel, 0);
+		layeredPane.add(playerPanel, gbc_MazeSection, 1);
+		
+		startPanel = new MyStartPanel();
+		layeredPane.add(startPanel, gbc_MazeSection, 0);
 		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
@@ -123,7 +123,7 @@ public class ApplicationUI extends JFrame {
 						System.exit(0);
 					}
 				} else if (menuName.equals("Instructions")) {
-					
+					JOptionPane.showMessageDialog(mazePanel, "Use arrow keys on to maneuver character around the maze.\n  ", "Instructions", JOptionPane.PLAIN_MESSAGE);
 				} else if (menuName.equals("About Us")) {
 					JOptionPane.showMessageDialog(mazePanel, "Created by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
 				}
@@ -228,6 +228,8 @@ public class ApplicationUI extends JFrame {
 	
 	private void paintNewMaze() {
 		if(row != 0 && column != 0) {
+			layeredPane.remove(startPanel);
+			
 			Maze mz = new Maze();
 			command = mz.generateMaze(row, column);
 			heightOffSet = this.getHeight() - mazePanel.getHeight();
@@ -302,6 +304,7 @@ public class ApplicationUI extends JFrame {
 	private MyMazePanel mazePanel;
 	private MyInfoPanel infoPanel;
 	private MyPlayerPanel playerPanel;
+	private MyStartPanel startPanel;
 	
 	private int row;
 	private int column;
