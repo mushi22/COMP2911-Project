@@ -1,14 +1,24 @@
 import java.awt.Point;
 
 
-public class Player extends Entity{
+public class Player{
+	Point position;
+	
+	void setPosition(int x, int y){
+		position.setLocation(x,y);
+	}
+	
+	Point getPosition(){
+		return position;
+	}
 	
 	public Player(){
-		super();
+		position = new Point();
 		setPosition(0, 0);
 	}
 	
 	public Player(Maze maz){
+		position = new Point();
 		setPosition(maz.getStart());
 	}
 	

@@ -254,7 +254,7 @@ public class ApplicationUI extends JFrame {
 		
 		playerPanel.revalidate();
 		playerPanel.repaint();
-		playerPanel.restartPlayer(player, mz);
+		playerPanel.restartPlayer(player, mz, MAXSIZE);
 	}
 	
 	//TODO: re-do this so its legit ;).
