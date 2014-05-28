@@ -163,88 +163,64 @@ public class ApplicationUI extends JFrame {
 		File file = new File("Graphics/Neon Wall Sprite 1.png");
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		neonWall1 = image;
 		neonWall1Orig = image;
 		
 		file = new File("Graphics/Neon Wall Sprite 2.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		neonWall2 = image;
 		neonWall2Orig = image;
 		
 		file = new File("Graphics/Player Sprite.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file); 
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		player = image;
 		playerOrig = image;
 		
 		file = new File("Graphics/rock sprite 1.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		rock1 = image;
 		rock1Orig = image;
 		
 		file = new File("Graphics/rock sprite 2.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		rock2 = image;
 		rock2Orig = image;
 		
 		file = new File("Graphics/rock sprite 3.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		rock3 = image;
 		rock3Orig = image;
 		
 		file = new File("Graphics/rock sprite 4.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
-		} catch (IOException ex) {
-			// handle exception ... 
+			image = ImageIO.read(file);
+		} catch (IOException ex) { 
 		}
 		rock4 = image;
 		rock4Orig = image;
 		
 		file = new File("Graphics/Wall Sprite 1.png");
 		try {
-			image = ImageIO.read(file); //Add IO HANDLING
-			//JLabel picLabel = new JLabel(new ImageIcon(image));
-			//add(picLabel);
+			image = ImageIO.read(file);
 		} catch (IOException ex) {
-			// handle exception ...
 		}
 		wall = image;
 		wallOrig = image;
@@ -282,25 +258,24 @@ public class ApplicationUI extends JFrame {
 		}
 	}
 	
-	//TODO: re-do this so its legit ;).
-	private BufferedImage resize(BufferedImage image, int width, int height) {
-	    BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
-	    Graphics2D g2d = (Graphics2D) bi.createGraphics();
-	    g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-	    g2d.drawImage(image, 0, 0, width, height, null);
-	    g2d.dispose();
-	    return bi;
+	private BufferedImage resizeImage(BufferedImage origImage, int width, int height) {
+	    BufferedImage tempImage = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+	    Graphics2D tempGraphics = (Graphics2D) tempImage.createGraphics();
+	    tempGraphics.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED));
+	    tempGraphics.drawImage(origImage, 0, 0, width, height, null);
+	    tempGraphics.dispose();
+	    return tempImage;
 	}
 	
 	private void resizeEverything (int width, int height){
-		neonWall1 = resize(neonWall1Orig, width, height);
-		neonWall2 = resize(neonWall2Orig, width, height);
-		player = resize(playerOrig, width, height);
-		rock1 = resize(rock1Orig, width, height);
-		rock2 = resize(rock2Orig, width, height);
-		rock3 = resize(rock3Orig, width, height);
-		rock4 = resize(rock4Orig, width, height);
-		wall = resize(wallOrig, width, height);
+		neonWall1 = resizeImage(neonWall1Orig, width, height);
+		neonWall2 = resizeImage(neonWall2Orig, width, height);
+		player = resizeImage(playerOrig, width, height);
+		rock1 = resizeImage(rock1Orig, width, height);
+		rock2 = resizeImage(rock2Orig, width, height);
+		rock3 = resizeImage(rock3Orig, width, height);
+		rock4 = resizeImage(rock4Orig, width, height);
+		wall = resizeImage(wallOrig, width, height);
 	}
 
 	private BufferedImage neonWall1Orig;
