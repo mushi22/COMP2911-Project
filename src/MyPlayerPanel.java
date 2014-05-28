@@ -24,9 +24,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 	private Maze maz;
 	private Player p;
 	
-	private int dimx;
-	private int dimy;
-	
 	public MyPlayerPanel(BufferedImage playerSprite){
 		setOpaque(false);
 		x = 0;
@@ -40,23 +37,15 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		
 		p = new Player();
 		p.setPosition(x,y);
-		
-		
-		dimx = playerSprite.getWidth();
-		dimy = playerSprite.getHeight();
 	}
 	
 	
-	public void restartPlayer(BufferedImage playerSprite, Maze maz, int dim){
+	public void restartPlayer(BufferedImage playerSprite, Maze maz){
 		this.playerSprite = playerSprite;
 		x = 0;
 		y = 0;
 		this.maz = maz;
 		p = new Player(maz);
-		
-		//set the distance the sprite jumps to the width of the jlabel, as opposed to the sprite
-		dimx = 800/maz.getMaz()[0].length;
-		dimy = 800/maz.getMaz()[0].length;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -72,17 +61,17 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT && p.moveleft(maz)) {
-			x = x - dimx;//playerSprite.getWidth();
+			x = x - playerSprite.getWidth();
 			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
 		} else if (key == KeyEvent.VK_RIGHT && p.moveright(maz)) {
-			x = x + dimx;//playerSprite.getWidth();
+			x = x + playerSprite.getWidth();
 			p.setPosition(p.getPosition().x + 1,p.getPosition().y);
 		} else if (key == KeyEvent.VK_UP && p.moveup(maz)) {
-			y = y - dimx;//playerSprite.getHeight();
+			y = y - playerSprite.getHeight();
 			p.setPosition(p.getPosition().x,p.getPosition().y - 1);
 		} else if (key == KeyEvent.VK_DOWN && p.movedown(maz)) {
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
-			y  = y + dimx;//playerSprite.getHeight();
+			y  = y + playerSprite.getHeight();
 		}
 		//System.out.println(playerSprite.getWidth() + " " +playerSprite.getHeight());
 	}
