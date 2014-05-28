@@ -2,10 +2,8 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
  * So this creates a panel of the same size as mazePanel which will still 
@@ -15,7 +13,7 @@ import javax.swing.JPanel;
  */
 import javax.swing.Timer;
 
-public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener{
+public class MyPlayerPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 3084030380611255577L;
 	public static final int ANIMATION_SPEED = 5;
 	private Timer animationTimer;
@@ -31,9 +29,6 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		y = 0;
 		animationTimer = new Timer(ANIMATION_SPEED, this);
 		animationTimer.start();
-		addKeyListener(this);
-		setFocusable(true); //Enable KeyListener
-		setFocusTraversalKeysEnabled(false); //No shift/tab keys
 		this.playerSprite = playerSprite;
 		
 		p = new Player();
@@ -53,14 +48,16 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 		super.paintComponent(g);
 		g.drawImage(playerSprite, x, y, this);
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		
+	public Boolean checkWin() {
+		return p.checkWin(maz);
+	}
+	
+	public void movePlayer(int key) {
 		if (key == KeyEvent.VK_LEFT && p.moveleft(maz)) {
 			x = x - playerSprite.getWidth();
 			p.setPosition(p.getPosition().x - 1,p.getPosition().y);
@@ -74,19 +71,5 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 			y  = y + playerSprite.getHeight();
 		}
-		
-		if (p.checkWin(maz)){
-			int option = JOptionPane.showConfirmDialog(this, "You Win! Would you like you like to play again?", "Winner!", JOptionPane.YES_NO_OPTION);
-			if (option == JOptionPane.YES_OPTION) {
-				//Restart game
-			} else {
-				System.exit(0);
-			}
-		}
-		
 	}
-	
-
-	public void keyTyped(KeyEvent arg0) {}
-	public void keyReleased(KeyEvent arg0) {}
 }

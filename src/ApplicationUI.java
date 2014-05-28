@@ -5,6 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -112,11 +116,7 @@ public class ApplicationUI extends JFrame {
 					paintNewMaze();
 					
 				} else if (menuName.equals("Restart")) {
-					if(row != 0 && column != 0) {
-						paintNewMaze();
-					} else {
-						JOptionPane.showMessageDialog(mazePanel, "You need to start a game first!", "Error", JOptionPane.PLAIN_MESSAGE);
-					}
+					paintNewMaze();
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
@@ -129,6 +129,29 @@ public class ApplicationUI extends JFrame {
 				}
 			}
 		});
+		
+		playerPanel.addKeyListener(new KeyListener() {
+			public void keyReleased(KeyEvent e) {
+				if (playerPanel.checkWin()){
+					int option = JOptionPane.showConfirmDialog(playerPanel, "Would you like you like to play again?", "You Win!", JOptionPane.YES_NO_OPTION);
+					if (option == JOptionPane.YES_OPTION) {
+						paintNewMaze();
+					} else {
+						System.exit(0);
+					}
+				}
+			}
+
+			public void keyPressed(KeyEvent e) {
+				int key = e.getKeyCode();
+				playerPanel.movePlayer(key);
+			}
+
+			public void keyTyped(KeyEvent e) {
+			}
+		});
+		
+		playerPanel.setFocusable(true);
 	}
 	
 	private int getSize(int mazeSize) {
@@ -228,32 +251,35 @@ public class ApplicationUI extends JFrame {
 	}
 	
 	private void paintNewMaze() {
-		Maze mz = new Maze();
-		command = mz.generateMaze(row, column);
-		System.out.println(command);
-		heightOffSet = this.getHeight() - mazePanel.getHeight();
-		widthOffSet = this.getWidth() - mazePanel.getWidth();
-		
-		setSize(getSize(row) + widthOffSet, getSize(row) + heightOffSet);
-		revalidate();
-		repaint();
-		
-		int pWidth = mazePanel.getWidth();
-		int pHeight = mazePanel.getHeight();
-		
-		int mHeight = mz.getMaz().length;
-		int mWidth = mz.getMaz()[0].length;
-		
-		resizeEverything(pWidth/mWidth, pHeight/mHeight);
-		mazePanel.removeAll();
-		mazePanel.drawMaze(mz.getMaz(), rock4, rock1);
-		
-		mazePanel.revalidate();
-		mazePanel.repaint();
-		
-		playerPanel.revalidate();
-		playerPanel.repaint();
-		playerPanel.restartPlayer(player, mz);
+		if(row != 0 && column != 0) {
+			Maze mz = new Maze();
+			command = mz.generateMaze(row, column);
+			heightOffSet = this.getHeight() - mazePanel.getHeight();
+			widthOffSet = this.getWidth() - mazePanel.getWidth();
+			
+			setSize(getSize(row) + widthOffSet, getSize(row) + heightOffSet);
+			revalidate();
+			repaint();
+			
+			int pWidth = mazePanel.getWidth();
+			int pHeight = mazePanel.getHeight();
+			
+			int mHeight = mz.getMaz().length;
+			int mWidth = mz.getMaz()[0].length;
+			
+			resizeEverything(pWidth/mWidth, pHeight/mHeight);
+			mazePanel.removeAll();
+			mazePanel.drawMaze(mz.getMaz(), rock4, rock1);
+			
+			mazePanel.revalidate();
+			mazePanel.repaint();
+			
+			playerPanel.revalidate();
+			playerPanel.repaint();
+			playerPanel.restartPlayer(player, mz);
+		} else {
+			JOptionPane.showMessageDialog(mazePanel, "You need to start a game first!", "Error", JOptionPane.PLAIN_MESSAGE);
+		}
 	}
 	
 	//TODO: re-do this so its legit ;).
