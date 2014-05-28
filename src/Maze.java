@@ -12,8 +12,9 @@ import java.util.Random;
  */
 
 public class Maze {
-	public static final int START = 2;
-	public static final int END = 3;
+	public static final int WALL = 0;
+	public static final int PATH = 1;
+	public static final int END = 2;
 	private int[][] maz;
 	private Point start;
 	private Point end;
@@ -58,7 +59,7 @@ public class Maze {
         
         //start = new Point((int)(Math.random()*row),(int)(Math.random()*column));
         start = new Point(0, 0);
-        getMaz()[(int) start.getY()][(int) start.getX()] = START;
+        getMaz()[(int) start.getY()][(int) start.getX()] = PATH;
         
         // get neighbours (each key has a value of where it came from)
         ArrayList<Point> nextLine = new ArrayList<Point>();
@@ -86,8 +87,8 @@ public class Maze {
         		// if both node and its opposite are walls
         		if(getMaz()[(int) currentnode.getY()][(int) currentnode.getX()]==0 && getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]==0){
     				// open path between the nodes
-    				getMaz()[(int) currentnode.getY()][(int) currentnode.getX()]=1;
-    				getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]=1;
+    				getMaz()[(int) currentnode.getY()][(int) currentnode.getX()]=PATH;
+    				getMaz()[(int) currentopp.getY()][(int) currentopp.getX()]=PATH;
  
     				// store end node in order to mark it later
     				endps.add(currentopp);
@@ -111,7 +112,6 @@ public class Maze {
 		// print final maze
 		for(int i=0;i<row;i++){
 			for(int j=0;j<column;j++){
-				//System.out.println(getMaz()[i][j]);
 				mazeString = mazeString.concat(Integer.toString(getMaz()[i][j]));
 			}
 			mazeString = mazeString.concat("\n");

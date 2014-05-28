@@ -29,8 +29,7 @@ public class Player{
 	boolean moveup(Maze maz){
 		try{
 			int[][] tMaz = maz.getMaz();
-			if(tMaz[position.y - 1][position.x] != 0){
-				//position.y++;
+			if(tMaz[position.y - 1][position.x] != Maze.WALL){
 				return true;
 			}
 			return false;
@@ -43,8 +42,7 @@ public class Player{
 	boolean movedown(Maze maz){
 		try{
 			int[][] tMaz = maz.getMaz();
-			if(tMaz[position.y + 1][position.x] != 0){
-				//position.y--;
+			if(tMaz[position.y + 1][position.x] != Maze.WALL){
 				return true;
 			}
 			return false;
@@ -57,8 +55,7 @@ public class Player{
 		
 		try{
 			int[][] tMaz = maz.getMaz();
-			if(tMaz[position.y][position.x-1] != 0){
-				//position.x--;
+			if(tMaz[position.y][position.x-1] != Maze.WALL){
 				return true;
 			}
 			return false;
@@ -71,8 +68,7 @@ public class Player{
 	boolean moveright(Maze maz){
 		try{
 			int[][] tMaz = maz.getMaz();
-			if(tMaz[position.y][position.x+1] != 0){
-				//position.x++;
+			if(tMaz[position.y][position.x+1] != Maze.WALL){
 				return true;
 			}
 			return false;
@@ -81,6 +77,18 @@ public class Player{
 		}
 		return false;
 	}
-
-
+	
+	boolean checkWin(Maze maz) {
+		try{
+			int[][] tMaz = maz.getMaz();
+			if(tMaz[position.y][position.x] == Maze.END){
+				return true;
+			}
+			return false;
+		} catch(Exception E){
+			
+		}
+		return false;
+	}
+	
 }

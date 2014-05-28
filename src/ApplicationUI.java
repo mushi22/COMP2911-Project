@@ -230,7 +230,7 @@ public class ApplicationUI extends JFrame {
 	private void paintNewMaze() {
 		Maze mz = new Maze();
 		command = mz.generateMaze(row, column);
-		
+		System.out.println(command);
 		heightOffSet = this.getHeight() - mazePanel.getHeight();
 		widthOffSet = this.getWidth() - mazePanel.getWidth();
 		

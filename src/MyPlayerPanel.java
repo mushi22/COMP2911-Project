@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
  * So this creates a panel of the same size as mazePanel which will still 
@@ -73,10 +74,19 @@ public class MyPlayerPanel extends JPanel implements ActionListener, KeyListener
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 			y  = y + playerSprite.getHeight();
 		}
+		
+		if (p.checkWin(maz)){
+			int option = JOptionPane.showConfirmDialog(this, "You Win! Would you like you like to play again?", "Winner!", JOptionPane.YES_NO_OPTION);
+			if (option == JOptionPane.YES_OPTION) {
+				//Restart game
+			} else {
+				System.exit(0);
+			}
+		}
+		
 	}
 	
 
 	public void keyTyped(KeyEvent arg0) {}
-	public void keyReleased(KeyEvent arg0) {
-	}
+	public void keyReleased(KeyEvent arg0) {}
 }
