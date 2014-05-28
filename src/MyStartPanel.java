@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 
 
 public class MyStartPanel extends JPanel {
+	private static final long serialVersionUID = -1621932320042675210L;
 	private JTextField txtMazeGame;
 
 	/**
