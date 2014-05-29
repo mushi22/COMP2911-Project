@@ -83,11 +83,11 @@ public class ApplicationUI extends JFrame {
 		
 		layeredPane.add(mazePanel, gbc_MazeSection, 2);
 		
-		playerPanel = new MyPlayerPanel(player);
-		layeredPane.add(playerPanel, gbc_MazeSection, 1);
-		
 		startPanel = new MyStartPanel();
-		layeredPane.add(startPanel, gbc_MazeSection, 0);
+		layeredPane.add(startPanel, gbc_MazeSection, 1);
+		
+		playerPanel = new MyPlayerPanel(player);
+		layeredPane.add(playerPanel, gbc_MazeSection, 0);
 		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
@@ -226,7 +226,7 @@ public class ApplicationUI extends JFrame {
 	
 	private void paintNewMaze() {
 		if(row != 0 && column != 0) {
-			layeredPane.remove(startPanel);
+			startPanel.setVisible(false);
 			
 			Maze mz = new Maze();
 			command = mz.generateMaze(row, column);
