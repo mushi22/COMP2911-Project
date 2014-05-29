@@ -1,3 +1,4 @@
+import java.awt.AWTException;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Graphics2D;
@@ -5,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -15,6 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 
 public class ApplicationUI extends JFrame {
@@ -83,11 +87,11 @@ public class ApplicationUI extends JFrame {
 		
 		layeredPane.add(mazePanel, gbc_MazeSection, 2);
 		
-		startPanel = new MyStartPanel();
-		layeredPane.add(startPanel, gbc_MazeSection, 1);
-		
 		playerPanel = new MyPlayerPanel(player);
-		layeredPane.add(playerPanel, gbc_MazeSection, 0);
+		layeredPane.add(playerPanel, gbc_MazeSection, 1);
+		
+		startPanel = new MyStartPanel();
+		layeredPane.add(startPanel, gbc_MazeSection, 0);
 		
 		/*Listeners*/
 		menuBar.addMenuBarListener(new MenuBarListener() {
@@ -113,10 +117,13 @@ public class ApplicationUI extends JFrame {
 					}
 					paintNewMaze();
 					
-				} else if (menuName.equals("Restart")) {
+				} else if (menuName.equals("New Game")) {
 					paintNewMaze();
+				} else if (menuName.equals("Restart")) {
+					playerPanel.restartPlayer();
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
+					mazePanel.requestFocus();
 					if (option == JOptionPane.YES_OPTION) {
 						System.exit(0);
 					}
@@ -124,7 +131,7 @@ public class ApplicationUI extends JFrame {
 					JOptionPane.showMessageDialog(mazePanel, "Use arrow keys on to maneuver character around the maze.\n  ", "Instructions", JOptionPane.PLAIN_MESSAGE);
 				} else if (menuName.equals("About Us")) {
 					JOptionPane.showMessageDialog(mazePanel, "Created by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
-				}
+				}playerPanel.requestFocus();
 			}
 		});
 		
@@ -164,7 +171,7 @@ public class ApplicationUI extends JFrame {
 			image = ImageIO.read(file);
 		} catch (IOException ex) {
 		}
-		neonWall1 = image;
+		neonWall1 = image;			validate();
 		neonWall1Orig = image;
 		
 		file = new File("Graphics/Neon Wall Sprite 2.png");
@@ -227,14 +234,14 @@ public class ApplicationUI extends JFrame {
 	private void paintNewMaze() {
 		if(row != 0 && column != 0) {
 			startPanel.setVisible(false);
-			
+			playerPanel.requestFocus();
 			Maze mz = new Maze();
 			command = mz.generateMaze(row, column);
 			heightOffSet = this.getHeight() - mazePanel.getHeight();
 			widthOffSet = this.getWidth() - mazePanel.getWidth();
 			
 			setSize(getSize(row) + widthOffSet, getSize(row) + heightOffSet);
-			revalidate();
+			validate();
 			repaint();
 			
 			int pWidth = mazePanel.getWidth();

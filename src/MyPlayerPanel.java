@@ -4,7 +4,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 /*
  * So this creates a panel of the same size as mazePanel which will still 
  *  redraw a lot and will probably be slow still. We could try make the player panel smaller 
@@ -31,10 +34,57 @@ public class MyPlayerPanel extends JPanel implements ActionListener{
 		animationTimer.start();
 		this.playerSprite = playerSprite;
 		
+		/*this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0),
+                "moveright");
+		
+		this.getActionMap().put("moveright",
+                moveright);
+		
+		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0),
+                "moveleft");
+		
+		this.getActionMap().put("moveleft",
+                moveleft);
+		
+		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0),
+                "moveup");
+		
+		this.getActionMap().put("moveup",
+                moveup);
+		
+		this.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0),
+                "movedown");
+		
+		this.getActionMap().put("movedown",
+                movedown);*/ 
+		
 		p = new Player();
 		p.setPosition(x,y);
 	}
 	
+	/*Action moveright = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	        movePlayer(KeyEvent.VK_RIGHT);
+	    }
+	};
+	
+	Action moveleft = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	        movePlayer(KeyEvent.VK_LEFT);
+	    }
+	};
+	
+	Action moveup = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	        movePlayer(KeyEvent.VK_UP);
+	    }
+	};
+	
+	Action movedown = new AbstractAction() {
+	    public void actionPerformed(ActionEvent e) {
+	        movePlayer(KeyEvent.VK_DOWN);
+	    }
+	};*/
 	
 	public void restartPlayer(BufferedImage playerSprite, Maze maz){
 		this.playerSprite = playerSprite;
@@ -71,5 +121,12 @@ public class MyPlayerPanel extends JPanel implements ActionListener{
 			p.setPosition(p.getPosition().x,p.getPosition().y + 1);
 			y  = y + playerSprite.getHeight();
 		}
+	}
+
+	public void restartPlayer() {
+		x = 0;
+		y = 0;
+		p = new Player();
+		
 	}
 }

@@ -63,6 +63,17 @@ public class MyMenuBar extends JMenuBar{
 		});
 		levelMenu.add(customMenu);
 		
+		newGameMenu = new JMenuItem("New Game");
+		newGameMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				String menuName = "New Game";
+				String mazeText = "NEW GAME TEST\n"; //Call Maze.java
+				fireEvent(new MenuBarEvent(this, menuName, mazeText));
+			}
+		});
+		gameMenu.add(newGameMenu);
+		
 		restartMenu = new JMenuItem("Restart");
 		restartMenu.addActionListener(new ActionListener() {
 			@Override
@@ -136,6 +147,7 @@ public class MyMenuBar extends JMenuBar{
 	private JMenuItem advancedMenu;
 	private JMenuItem customMenu;
 	private JMenuItem restartMenu;
+	private JMenuItem newGameMenu;
 	private JMenuItem quitMenu;
 	private JMenuItem instructionsMenu;
 	private JMenuItem aboutUsMenu;
