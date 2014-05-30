@@ -136,7 +136,7 @@ public class ApplicationUI extends JFrame {
 						System.exit(0);
 					}
 				} else if (menuName.equals("Instructions")) {
-					JOptionPane.showMessageDialog(mazePanel, "Use arrow keys on to maneuver character around the maze.\n  ", "Instructions", JOptionPane.PLAIN_MESSAGE);
+					JOptionPane.showMessageDialog(mazePanel, "Navigate maze using arrow keys!\n", "Instructions", JOptionPane.PLAIN_MESSAGE);
 				} else if (menuName.equals("About Us")) {
 					JOptionPane.showMessageDialog(mazePanel, "Created by:\n" + "Andrew Thanh Tran\n" + "Arien Judge\n" + "Peter Ho\n" + "Sohaib Mushtaq\n", "About Us", JOptionPane.PLAIN_MESSAGE);
 				}playerPanel.requestFocus();

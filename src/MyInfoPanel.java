@@ -41,13 +41,13 @@ public class MyInfoPanel extends JPanel {
 		add(timeLabel, gbc_timeLabel);
 		
 		timeField = new JTextField();
+		timeField.setEditable(false);
 		GridBagConstraints gbc_timeField = new GridBagConstraints();
 		gbc_timeField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_timeField.gridx = 1;
 		gbc_timeField.gridy = 0;
 		add(timeField, gbc_timeField);
 		timeField.setColumns(10);
-		timeField.setEnabled(false);
 		t = new Timer(delay, updateBox);
 	}
 	

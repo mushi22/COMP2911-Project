@@ -8,11 +8,14 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 
 public class MyStartPanel extends JPanel {
 	private static final long serialVersionUID = -1621932320042675210L;
 	private JTextField txtMazeGame;
+	private JTextField txtNavigateMazeUsing;
+	private JTextField txtBy;
 
 	/**
 	 * Create the panel.
@@ -21,12 +24,13 @@ public class MyStartPanel extends JPanel {
 		setOpaque(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		txtMazeGame = new JTextField();
+		txtMazeGame.setEditable(false);
 		txtMazeGame.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMazeGame.setFont(new Font("Traditional Arabic", Font.BOLD, 50));
 		txtMazeGame.setText("Maze Game!");
@@ -37,25 +41,36 @@ public class MyStartPanel extends JPanel {
 		gbc_txtMazeGame.gridy = 0;
 		add(txtMazeGame, gbc_txtMazeGame);
 		txtMazeGame.setColumns(10);
-		txtMazeGame.setEnabled(false);
 		
-		JButton btnNewButton = new JButton("Start New Game!");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 1;
-		add(btnNewButton, gbc_btnNewButton);
+		JLabel lblInstructions = new JLabel("Instructions");
+		GridBagConstraints gbc_lblInstructions = new GridBagConstraints();
+		gbc_lblInstructions.insets = new Insets(0, 0, 5, 0);
+		gbc_lblInstructions.gridx = 0;
+		gbc_lblInstructions.gridy = 1;
+		add(lblInstructions, gbc_lblInstructions);
 		
-		JButton btnNewButton_1 = new JButton("Instructions!");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 2;
-		add(btnNewButton_1, gbc_btnNewButton_1);
-
+		txtNavigateMazeUsing = new JTextField();
+		txtNavigateMazeUsing.setHorizontalAlignment(SwingConstants.CENTER);
+		txtNavigateMazeUsing.setEditable(false);
+		txtNavigateMazeUsing.setText("Navigate maze using arrow keys!");
+		GridBagConstraints gbc_txtNavigateMazeUsing = new GridBagConstraints();
+		gbc_txtNavigateMazeUsing.insets = new Insets(0, 0, 5, 0);
+		gbc_txtNavigateMazeUsing.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNavigateMazeUsing.gridx = 0;
+		gbc_txtNavigateMazeUsing.gridy = 2;
+		add(txtNavigateMazeUsing, gbc_txtNavigateMazeUsing);
+		txtNavigateMazeUsing.setColumns(10);
+		
+		txtBy = new JTextField();
+		txtBy.setEditable(false);
+		txtBy.setHorizontalAlignment(SwingConstants.CENTER);
+		txtBy.setText("Created by: Andrew Thanh Tran, Arien Judge, Peter Ho, Sohaib Mushtaq");
+		GridBagConstraints gbc_txtBy = new GridBagConstraints();
+		gbc_txtBy.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtBy.gridx = 0;
+		gbc_txtBy.gridy = 7;
+		add(txtBy, gbc_txtBy);
+		txtBy.setColumns(10);
 	}
 
 }
