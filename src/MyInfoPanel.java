@@ -16,7 +16,8 @@ public class MyInfoPanel extends JPanel {
 	private Timer countdown;
 	
 	private int delay = 1000;
-	private int secRemain;
+	private int secRemain = 0;
+	private int initialTime = 0;
 	private JTextField timeField;
 	private Timer t;
 	/**
@@ -62,8 +63,21 @@ public class MyInfoPanel extends JPanel {
 		if(t.isRunning())
 			t.stop();
 		secRemain = time;
-		//t = new Timer(delay, updateBox);
+		initialTime = time;
 		t.start();
+	}
+	
+	public int stopCount(){
+		t.stop();
+		return getSecRemain();
+	}
+
+	public int getSecRemain() {
+		return secRemain;
+	}
+	
+	public int getInitial(){
+		return initialTime;
 	}
 
 }

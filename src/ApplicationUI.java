@@ -100,20 +100,31 @@ public class ApplicationUI extends JFrame {
 					if (menuName.equals("Beginner")) {
 						row = 20;
 						column = 20;
+						infoPanel.startCount(20);
 					} else if (menuName.equals("Intermediate")) {
 						row = 40;
 						column = 40;
+						infoPanel.startCount(40);
 					} else if (menuName.equals("Advanced")) {
 						row = 60;
 						column = 60;
+						infoPanel.startCount(60);
 					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE, has to be square/ larger than 20
-						row = 100;
-						column = 100;
+						int ans = 20;
+						try{
+							ans = Integer.parseInt( JOptionPane.showInputDialog("Enter the dimensions of the desired maze."));
+						} catch(NumberFormatException e){
+							JOptionPane.showMessageDialog(layeredPane, "Integer was not input. Defaulting to beginner.",
+								    "Error",
+								    JOptionPane.ERROR_MESSAGE, null); 
+						}
+						row = ans;
+						column = ans;
+						infoPanel.startCount(row);
 						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
 					paintNewMaze();
-					infoPanel.startCount(100);
 				} else if (menuName.equals("New Game")) {
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
@@ -135,7 +146,8 @@ public class ApplicationUI extends JFrame {
 		playerPanel.addKeyListener(new KeyListener() {
 			public void keyReleased(KeyEvent e) {
 				if (playerPanel.checkWin()){
-					int option = JOptionPane.showConfirmDialog(playerPanel, "Would you like you like to play again?", "You Win!", JOptionPane.YES_NO_OPTION);
+					int option = JOptionPane.showConfirmDialog(playerPanel, "Congratulations, you finished in " + Integer.toString(infoPanel.getInitial() - infoPanel.stopCount())
+																+ " seconds. Would you like you like to play again?", "You Win!", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
 						paintNewMaze();
 					} else {
