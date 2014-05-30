@@ -100,15 +100,12 @@ public class ApplicationUI extends JFrame {
 					if (menuName.equals("Beginner")) {
 						row = 20;
 						column = 20;
-						infoPanel.startCount(20);
 					} else if (menuName.equals("Intermediate")) {
 						row = 40;
 						column = 40;
-						infoPanel.startCount(40);
 					} else if (menuName.equals("Advanced")) {
 						row = 60;
 						column = 60;
-						infoPanel.startCount(60);
 					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE, has to be square/ larger than 20
 						int ans = 20;
 						try{
@@ -120,14 +117,16 @@ public class ApplicationUI extends JFrame {
 						}
 						row = ans;
 						column = ans;
-						infoPanel.startCount(row);
 						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
+					infoPanel.startCount(row);
 					paintNewMaze();
 				} else if (menuName.equals("New Game")) {
+					infoPanel.startCount(row);
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
+					infoPanel.startCount(row);
 					playerPanel.restartPlayer();
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
@@ -149,6 +148,7 @@ public class ApplicationUI extends JFrame {
 					int option = JOptionPane.showConfirmDialog(playerPanel, "Congratulations, you finished in " + Integer.toString(infoPanel.getInitial() - infoPanel.stopCount())
 																+ " seconds. Would you like you like to play again?", "You Win!", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
+						infoPanel.startCount(row);
 						paintNewMaze();
 					} else {
 						System.exit(0);
