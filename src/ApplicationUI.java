@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 public class ApplicationUI extends JFrame {
@@ -112,7 +113,7 @@ public class ApplicationUI extends JFrame {
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
 					paintNewMaze();
-					
+					infoPanel.startCount(100);
 				} else if (menuName.equals("New Game")) {
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {

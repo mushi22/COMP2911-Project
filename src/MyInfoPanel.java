@@ -2,15 +2,23 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 
 public class MyInfoPanel extends JPanel {
 	private static final long serialVersionUID = 8699105079283174266L;
-
+	private Timer countdown;
+	
+	private int delay = 1000;
+	private int secRemain;
+	private JTextField timeField;
+	private Timer t;
 	/**
 	 * Create the panel.
 	 */
@@ -31,7 +39,7 @@ public class MyInfoPanel extends JPanel {
 		gbc_timeLabel.gridy = 0;
 		add(timeLabel, gbc_timeLabel);
 		
-		JTextField timeField = new JTextField();
+		timeField = new JTextField();
 		GridBagConstraints gbc_timeField = new GridBagConstraints();
 		gbc_timeField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_timeField.gridx = 1;
@@ -39,6 +47,23 @@ public class MyInfoPanel extends JPanel {
 		add(timeField, gbc_timeField);
 		timeField.setColumns(10);
 		timeField.setEnabled(false);
+		t = new Timer(delay, updateBox);
+	}
+	
+	ActionListener updateBox = new ActionListener() {
+		
+	      public void actionPerformed(ActionEvent e) {
+	    	  secRemain--;
+	    	  timeField.setText(Integer.toString(secRemain));
+	      }
+		};
+		
+	public void startCount(int time){
+		if(t.isRunning())
+			t.stop();
+		secRemain = time;
+		//t = new Timer(delay, updateBox);
+		t.start();
 	}
 
 }
