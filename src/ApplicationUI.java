@@ -238,6 +238,14 @@ public class ApplicationUI extends JFrame {
 		}
 		wall = image;
 		wallOrig = image;
+		
+		file = new File("Graphics/Exit Sprite.png");
+		try {
+			image = ImageIO.read(file);
+		} catch (IOException ex) {
+		}
+		exit = image;
+		exitOrig = image;
 	}
 	
 	private void paintNewMaze() {
@@ -261,7 +269,7 @@ public class ApplicationUI extends JFrame {
 			
 			resizeEverything(pWidth/mWidth, pHeight/mHeight);
 			mazePanel.removeAll();
-			mazePanel.drawMaze(mz.getMaz(), rock4, rock1);
+			mazePanel.drawMaze(mz.getMaz(), rock4, exit);
 			
 			mazePanel.revalidate();
 			mazePanel.repaint();
@@ -292,6 +300,7 @@ public class ApplicationUI extends JFrame {
 		rock3 = resizeImage(rock3Orig, width, height);
 		rock4 = resizeImage(rock4Orig, width, height);
 		wall = resizeImage(wallOrig, width, height);
+		exit = resizeImage(exitOrig, width, height);
 	}
 
 	private BufferedImage neonWall1Orig;
@@ -302,6 +311,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock3Orig;
 	private BufferedImage rock4Orig;
 	private BufferedImage wallOrig;
+	private BufferedImage exitOrig;
 	
 	private BufferedImage neonWall1;
 	private BufferedImage neonWall2;
@@ -311,6 +321,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock3;
 	private BufferedImage rock4;
 	private BufferedImage wall;
+	private BufferedImage exit;
 	
 	JLayeredPane layeredPane;
 	
