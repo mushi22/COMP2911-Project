@@ -13,7 +13,6 @@ import javax.swing.Timer;
 
 public class MyInfoPanel extends JPanel {
 	private static final long serialVersionUID = 8699105079283174266L;
-	private Timer countdown;
 	
 	private int delay = 1000;
 	private int secRemain = 0;
@@ -48,16 +47,16 @@ public class MyInfoPanel extends JPanel {
 		gbc_timeField.gridy = 0;
 		add(timeField, gbc_timeField);
 		timeField.setColumns(10);
-		t = new Timer(delay, updateBox);
+		t = null;//new Timer(delay, updateBox);
 	}
 	
-	ActionListener updateBox = new ActionListener() {
+	/*ActionListener updateBox = new ActionListener() {
 		
 	      public void actionPerformed(ActionEvent e) {
 	    	  secRemain--;
 	    	  timeField.setText(Integer.toString(secRemain));
 	      }
-		};
+		};*/
 		
 	public void startCount(int time){
 		if(t.isRunning())
@@ -79,5 +78,18 @@ public class MyInfoPanel extends JPanel {
 	public int getInitial(){
 		return initialTime;
 	}
+	
+	public void decSecRemain(){
+		secRemain--;
+	}
+	
+	public void updateField(){
+		timeField.setText(Integer.toString(secRemain));
+	}
+	
+	public void setTimer(ActionListener updateBox){
+		t = new Timer(delay, updateBox);
+	}
 
 }
+

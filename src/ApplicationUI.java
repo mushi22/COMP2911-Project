@@ -92,7 +92,7 @@ public class ApplicationUI extends JFrame {
 		playerPanel = new MyPlayerPanel(player);
 		layeredPane.add(playerPanel, gbc_MazeSection, 1);
 		
-		startPanel = new MyStartPanel();
+		startPanel = new MyStartPanel(menu);
 		layeredPane.add(startPanel, gbc_MazeSection, 0);
 		
 		/*Listeners*/
@@ -115,10 +115,15 @@ public class ApplicationUI extends JFrame {
 						int ans = 20;
 						try{
 							ans = Integer.parseInt( JOptionPane.showInputDialog("Enter the dimensions of the desired maze."));
+							while (ans < 20) {
+								JOptionPane.showMessageDialog(mazePanel, "C'mon, that's too small! Try something harder (>20)\n", "Too easy!", JOptionPane.PLAIN_MESSAGE);
+								ans = Integer.parseInt( JOptionPane.showInputDialog("Enter the dimensions of the desired maze."));
+							}
 						} catch(NumberFormatException e){
 							JOptionPane.showMessageDialog(layeredPane, "Integer was not input. Defaulting to beginner.",
 								    "Error",
 								    JOptionPane.ERROR_MESSAGE, null); 
+							ans = 20;
 						}
 						row = ans;
 						column = ans;
@@ -271,6 +276,14 @@ public class ApplicationUI extends JFrame {
 		}
 		exit = image;
 		exitOrig = image;
+		
+		file = new File("Graphics/Menu.png");
+		try {
+			image = ImageIO.read(file);
+		} catch (IOException ex) {
+		}
+		menu = image;
+		menuOrig = image;
 	}
 	
 	private void paintNewMaze() {
@@ -337,6 +350,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock4Orig;
 	private BufferedImage wallOrig;
 	private BufferedImage exitOrig;
+	private BufferedImage menuOrig;
 	
 	private BufferedImage neonWall1;
 	private BufferedImage neonWall2;
@@ -347,6 +361,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock4;
 	private BufferedImage wall;
 	private BufferedImage exit;
+	private BufferedImage menu;
 	
 	JLayeredPane layeredPane;
 	

@@ -11,7 +11,7 @@ public class MyMazePanel extends JPanel {
 	private static final long serialVersionUID = 3766751218594555709L;
 
 	public MyMazePanel() {
-		setBackground(Color.LIGHT_GRAY);	
+		setBackground(Color.BLACK);	
 	}
 	
 	public void drawMaze(int[][] maz, BufferedImage sprite, BufferedImage spriteEnd) {

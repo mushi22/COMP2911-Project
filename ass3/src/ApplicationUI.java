@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -71,6 +73,9 @@ public class ApplicationUI extends JFrame {
 		gbc_infoPanel.fill = GridBagConstraints.BOTH;
 		gbc_infoPanel.gridx = 0;
 		gbc_infoPanel.gridy = 0;
+		
+		infoPanel.setTimer(updateBox);
+		
 		layeredPane.add(infoPanel, gbc_infoPanel);
 		
 		/*Maze Section*/
@@ -87,7 +92,7 @@ public class ApplicationUI extends JFrame {
 		playerPanel = new MyPlayerPanel(player);
 		layeredPane.add(playerPanel, gbc_MazeSection, 1);
 		
-		startPanel = new MyStartPanel();
+		startPanel = new MyStartPanel(menu);
 		layeredPane.add(startPanel, gbc_MazeSection, 0);
 		
 		/*Listeners*/
@@ -100,34 +105,38 @@ public class ApplicationUI extends JFrame {
 					if (menuName.equals("Beginner")) {
 						row = 20;
 						column = 20;
-						infoPanel.startCount(20);
 					} else if (menuName.equals("Intermediate")) {
 						row = 40;
 						column = 40;
-						infoPanel.startCount(40);
 					} else if (menuName.equals("Advanced")) {
 						row = 60;
 						column = 60;
-						infoPanel.startCount(60);
 					} else if (menuName.equals("Custom")) { //EDIT TO OPEN UP PROMPT MESSAGE, has to be square/ larger than 20
 						int ans = 20;
 						try{
 							ans = Integer.parseInt( JOptionPane.showInputDialog("Enter the dimensions of the desired maze."));
+							while (ans < 20) {
+								JOptionPane.showMessageDialog(mazePanel, "C'mon, that's too small! Try something harder (>20)\n", "Too easy!", JOptionPane.PLAIN_MESSAGE);
+								ans = Integer.parseInt( JOptionPane.showInputDialog("Enter the dimensions of the desired maze."));
+							}
 						} catch(NumberFormatException e){
 							JOptionPane.showMessageDialog(layeredPane, "Integer was not input. Defaulting to beginner.",
 								    "Error",
 								    JOptionPane.ERROR_MESSAGE, null); 
+							ans = 20;
 						}
 						row = ans;
 						column = ans;
-						infoPanel.startCount(row);
 						//http://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
 						//http://docs.oracle.com/javase/tutorial/uiswing/examples/components/DialogDemoProject/src/components/CustomDialog.java
 					}
+					infoPanel.startCount(row);
 					paintNewMaze();
 				} else if (menuName.equals("New Game")) {
+					infoPanel.startCount(row);
 					paintNewMaze();
 				} else if (menuName.equals("Restart")) {
+					infoPanel.startCount(row);
 					playerPanel.restartPlayer();
 				} else if (menuName.equals("Quit")) {
 					int option = JOptionPane.showConfirmDialog(mazePanel, "Are you sure?", "Quit", JOptionPane.YES_NO_OPTION);
@@ -149,6 +158,7 @@ public class ApplicationUI extends JFrame {
 					int option = JOptionPane.showConfirmDialog(playerPanel, "Congratulations, you finished in " + Integer.toString(infoPanel.getInitial() - infoPanel.stopCount())
 																+ " seconds. Would you like you like to play again?", "You Win!", JOptionPane.YES_NO_OPTION);
 					if (option == JOptionPane.YES_OPTION) {
+						infoPanel.startCount(row);
 						paintNewMaze();
 					} else {
 						System.exit(0);
@@ -167,6 +177,26 @@ public class ApplicationUI extends JFrame {
 		
 		playerPanel.setFocusable(true);
 	}
+	
+	
+	ActionListener updateBox = new ActionListener() {
+		
+	      public void actionPerformed(ActionEvent e) {
+	    	  if(infoPanel.getSecRemain() == 0){
+	    		  infoPanel.stopCount();
+	    		  int option = JOptionPane.showConfirmDialog(playerPanel, "That's a shame, you lost. Would you like you like to play again?", "You Lose!", JOptionPane.YES_NO_OPTION);
+				  if (option == JOptionPane.YES_OPTION) {
+					infoPanel.startCount(row);
+				    paintNewMaze();
+				  } else {
+					System.exit(0);
+			      }
+	    		  
+	    	  }
+	    	  infoPanel.decSecRemain();
+	    	  infoPanel.updateField();
+	      }
+		};
 	
 	private int getSize(int mazeSize) {
 		int remainder = MAXSIZE%mazeSize;
@@ -246,6 +276,14 @@ public class ApplicationUI extends JFrame {
 		}
 		exit = image;
 		exitOrig = image;
+		
+		file = new File("Graphics/Menu.png");
+		try {
+			image = ImageIO.read(file);
+		} catch (IOException ex) {
+		}
+		menu = image;
+		menuOrig = image;
 	}
 	
 	private void paintNewMaze() {
@@ -312,6 +350,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock4Orig;
 	private BufferedImage wallOrig;
 	private BufferedImage exitOrig;
+	private BufferedImage menuOrig;
 	
 	private BufferedImage neonWall1;
 	private BufferedImage neonWall2;
@@ -322,6 +361,7 @@ public class ApplicationUI extends JFrame {
 	private BufferedImage rock4;
 	private BufferedImage wall;
 	private BufferedImage exit;
+	private BufferedImage menu;
 	
 	JLayeredPane layeredPane;
 	

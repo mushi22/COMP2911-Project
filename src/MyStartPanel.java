@@ -1,26 +1,25 @@
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 public class MyStartPanel extends JPanel {
 	private static final long serialVersionUID = -1621932320042675210L;
-	private JTextField txtMazeGame;
 	private JTextField txtNavigateMazeUsing;
 	private JTextField txtBy;
+	private JLabel lblMazeGame;
 
 	/**
 	 * Create the panel.
 	 */
-	public MyStartPanel() {
+	public MyStartPanel(BufferedImage menu) {
 		setOpaque(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -29,18 +28,12 @@ public class MyStartPanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		txtMazeGame = new JTextField();
-		txtMazeGame.setEditable(false);
-		txtMazeGame.setHorizontalAlignment(SwingConstants.CENTER);
-		txtMazeGame.setFont(new Font("Traditional Arabic", Font.BOLD, 50));
-		txtMazeGame.setText("Maze Game!");
-		GridBagConstraints gbc_txtMazeGame = new GridBagConstraints();
-		gbc_txtMazeGame.insets = new Insets(0, 0, 5, 0);
-		gbc_txtMazeGame.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtMazeGame.gridx = 0;
-		gbc_txtMazeGame.gridy = 0;
-		add(txtMazeGame, gbc_txtMazeGame);
-		txtMazeGame.setColumns(10);
+		lblMazeGame = new JLabel(new ImageIcon(menu));
+		GridBagConstraints gbc_lblMazeGame = new GridBagConstraints();
+		gbc_lblMazeGame.insets = new Insets(0, 0, 5, 0);
+		gbc_lblMazeGame.gridx = 0;
+		gbc_lblMazeGame.gridy = 0;
+		add(lblMazeGame, gbc_lblMazeGame);
 		
 		JLabel lblInstructions = new JLabel("Instructions");
 		GridBagConstraints gbc_lblInstructions = new GridBagConstraints();
