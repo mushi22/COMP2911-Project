@@ -5,21 +5,30 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.event.EventListenerList;
+import java.awt.Color;
 
 
 public class MyMenuBar extends JMenuBar{
 	private static final long serialVersionUID = -3004868188333448242L;
 	
 	public MyMenuBar() {
+		setForeground(Color.WHITE);
+		setBackground(Color.BLACK);
 		listenerList = new EventListenerList();
 		
 		gameMenu = new JMenu("Game");
+		gameMenu.setForeground(Color.WHITE);
+		gameMenu.setBackground(Color.BLACK);
 		add(gameMenu);
 		
 		levelMenu = new JMenu("Level");
+		levelMenu.setForeground(Color.WHITE);
+		levelMenu.setBackground(Color.BLACK);
 		gameMenu.add(levelMenu);
 		
 		beginnerMenu = new JMenuItem("Beginner");
+		beginnerMenu.setForeground(Color.WHITE);
+		beginnerMenu.setBackground(Color.BLACK);
 		beginnerMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -31,6 +40,8 @@ public class MyMenuBar extends JMenuBar{
 		levelMenu.add(beginnerMenu);
 		
 		intermediateMenu = new JMenuItem("Intermediate");
+		intermediateMenu.setForeground(Color.WHITE);
+		intermediateMenu.setBackground(Color.BLACK);
 		intermediateMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -42,6 +53,8 @@ public class MyMenuBar extends JMenuBar{
 		levelMenu.add(intermediateMenu);
 		
 		advancedMenu = new JMenuItem("Advanced");
+		advancedMenu.setForeground(Color.WHITE);
+		advancedMenu.setBackground(Color.BLACK);
 		advancedMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -53,6 +66,8 @@ public class MyMenuBar extends JMenuBar{
 		levelMenu.add(advancedMenu);
 		
 		customMenu = new JMenuItem("Custom");
+		customMenu.setForeground(Color.WHITE);
+		customMenu.setBackground(Color.BLACK);
 		customMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -64,6 +79,8 @@ public class MyMenuBar extends JMenuBar{
 		levelMenu.add(customMenu);
 		
 		newGameMenu = new JMenuItem("New Game");
+		newGameMenu.setForeground(Color.WHITE);
+		newGameMenu.setBackground(Color.BLACK);
 		newGameMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -75,6 +92,8 @@ public class MyMenuBar extends JMenuBar{
 		gameMenu.add(newGameMenu);
 		
 		restartMenu = new JMenuItem("Restart");
+		restartMenu.setForeground(Color.WHITE);
+		restartMenu.setBackground(Color.BLACK);
 		restartMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -86,6 +105,8 @@ public class MyMenuBar extends JMenuBar{
 		gameMenu.add(restartMenu);
 		
 		quitMenu = new JMenuItem("Quit");
+		quitMenu.setForeground(Color.WHITE);
+		quitMenu.setBackground(Color.BLACK);
 		quitMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -100,6 +121,8 @@ public class MyMenuBar extends JMenuBar{
 		add(helpMenu);
 		
 		instructionsMenu = new JMenuItem("Instructions");
+		instructionsMenu.setForeground(Color.WHITE);
+		instructionsMenu.setBackground(Color.BLACK);
 		instructionsMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -111,6 +134,8 @@ public class MyMenuBar extends JMenuBar{
 		helpMenu.add(instructionsMenu);
 		
 		aboutUsMenu = new JMenuItem("About Us");
+		aboutUsMenu.setForeground(Color.WHITE);
+		aboutUsMenu.setBackground(Color.BLACK);
 		aboutUsMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {

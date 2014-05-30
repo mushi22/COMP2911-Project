@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import java.awt.Font;
 
 
 public class MyInfoPanel extends JPanel {
@@ -23,7 +24,8 @@ public class MyInfoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MyInfoPanel() {
-		setBackground(Color.LIGHT_GRAY);
+		setForeground(Color.WHITE);
+		setBackground(Color.BLACK);
 		
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
 		gbl_infoPanel.columnWidths = new int[]{0,0};
@@ -33,6 +35,8 @@ public class MyInfoPanel extends JPanel {
 		setLayout(gbl_infoPanel);
 		
 		JLabel timeLabel = new JLabel("Time Remaining");
+		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		timeLabel.setForeground(Color.WHITE);
 		GridBagConstraints gbc_timeLabel = new GridBagConstraints();
 		gbc_timeLabel.insets = new Insets(0, 0, 0, 0);
 		gbc_timeLabel.gridx = 0;
@@ -40,6 +44,9 @@ public class MyInfoPanel extends JPanel {
 		add(timeLabel, gbc_timeLabel);
 		
 		timeField = new JTextField();
+		timeField.setFont(new Font("Tahoma", Font.BOLD, 20));
+		timeField.setBackground(Color.BLACK);
+		timeField.setForeground(Color.WHITE);
 		timeField.setEditable(false);
 		GridBagConstraints gbc_timeField = new GridBagConstraints();
 		gbc_timeField.fill = GridBagConstraints.HORIZONTAL;

@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.JButton;
 
 
 public class MyStartPanel extends JPanel {
@@ -18,6 +19,7 @@ public class MyStartPanel extends JPanel {
 	private JLabel lblMazeGame;
 	private JLabel lblNavigateMazeUsing;
 	private JLabel lblCreatedByAndrew;
+	private JButton btnStartNewGame;
 
 	/**
 	 * Create the panel.
@@ -30,7 +32,7 @@ public class MyStartPanel extends JPanel {
 		gridBagLayout.columnWidths = new int[]{0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblMazeGame = new JLabel(new ImageIcon(menu));
@@ -58,6 +60,15 @@ public class MyStartPanel extends JPanel {
 		gbc_lblNavigateMazeUsing.gridx = 0;
 		gbc_lblNavigateMazeUsing.gridy = 2;
 		add(lblNavigateMazeUsing, gbc_lblNavigateMazeUsing);
+		
+		btnStartNewGame = new JButton("Start New Game!");
+		btnStartNewGame.setForeground(Color.WHITE);
+		btnStartNewGame.setBackground(Color.BLACK);
+		GridBagConstraints gbc_btnStartNewGame = new GridBagConstraints();
+		gbc_btnStartNewGame.insets = new Insets(0, 0, 5, 0);
+		gbc_btnStartNewGame.gridx = 0;
+		gbc_btnStartNewGame.gridy = 3;
+		add(btnStartNewGame, gbc_btnStartNewGame);
 		
 		lblCreatedByAndrew = new JLabel("Created by: Andrew Thanh Tran, Arien Judge, Peter Ho, Sohaib Mushtaq");
 		lblCreatedByAndrew.setForeground(Color.WHITE);
