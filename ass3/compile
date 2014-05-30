@@ -11,10 +11,11 @@ for file in $FILES
 do
     echo "compiling $file"
     javac -cp "./src/" -d bin $file
-    if [ $? -ne 0 ]
+	if [ $? -ne 0 ]
     then
         exit 1
     fi
+
 done
 
 echo "done"
