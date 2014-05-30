@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -71,6 +73,9 @@ public class ApplicationUI extends JFrame {
 		gbc_infoPanel.fill = GridBagConstraints.BOTH;
 		gbc_infoPanel.gridx = 0;
 		gbc_infoPanel.gridy = 0;
+		
+		infoPanel.setTimer(updateBox);
+		
 		layeredPane.add(infoPanel, gbc_infoPanel);
 		
 		/*Maze Section*/
@@ -167,6 +172,26 @@ public class ApplicationUI extends JFrame {
 		
 		playerPanel.setFocusable(true);
 	}
+	
+	
+	ActionListener updateBox = new ActionListener() {
+		
+	      public void actionPerformed(ActionEvent e) {
+	    	  if(infoPanel.getSecRemain() == 0){
+	    		  infoPanel.stopCount();
+	    		  int option = JOptionPane.showConfirmDialog(playerPanel, "That's a shame, you lost. Would you like you like to play again?", "You Lose!", JOptionPane.YES_NO_OPTION);
+				  if (option == JOptionPane.YES_OPTION) {
+					infoPanel.startCount(row);
+				    paintNewMaze();
+				  } else {
+					System.exit(0);
+			      }
+	    		  
+	    	  }
+	    	  infoPanel.decSecRemain();
+	    	  infoPanel.updateField();
+	      }
+		};
 	
 	private int getSize(int mazeSize) {
 		int remainder = MAXSIZE%mazeSize;
