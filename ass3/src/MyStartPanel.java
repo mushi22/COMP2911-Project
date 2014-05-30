@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 
 
 public class MyStartPanel extends JPanel {
@@ -20,6 +21,8 @@ public class MyStartPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MyStartPanel(BufferedImage menu) {
+		setBackground(Color.BLACK);
+		setForeground(Color.WHITE);
 		setOpaque(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -36,6 +39,8 @@ public class MyStartPanel extends JPanel {
 		add(lblMazeGame, gbc_lblMazeGame);
 		
 		JLabel lblInstructions = new JLabel("Instructions");
+		lblInstructions.setBackground(Color.BLACK);
+		lblInstructions.setForeground(Color.WHITE);
 		GridBagConstraints gbc_lblInstructions = new GridBagConstraints();
 		gbc_lblInstructions.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInstructions.gridx = 0;
@@ -43,6 +48,8 @@ public class MyStartPanel extends JPanel {
 		add(lblInstructions, gbc_lblInstructions);
 		
 		txtNavigateMazeUsing = new JTextField();
+		txtNavigateMazeUsing.setForeground(Color.WHITE);
+		txtNavigateMazeUsing.setBackground(Color.BLACK);
 		txtNavigateMazeUsing.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNavigateMazeUsing.setEditable(false);
 		txtNavigateMazeUsing.setText("Navigate maze using arrow keys!");
@@ -55,6 +62,8 @@ public class MyStartPanel extends JPanel {
 		txtNavigateMazeUsing.setColumns(10);
 		
 		txtBy = new JTextField();
+		txtBy.setBackground(Color.BLACK);
+		txtBy.setForeground(Color.WHITE);
 		txtBy.setEditable(false);
 		txtBy.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBy.setText("Created by: Andrew Thanh Tran, Arien Judge, Peter Ho, Sohaib Mushtaq");
